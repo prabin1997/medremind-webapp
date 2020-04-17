@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  if user
+    .appointment.container.grey-text.text-darken-1
+      h5.center Medications Diary
+    each appointment in appointments
+      .card-panel.appointment.white.row
+        .appointment-details
+          .appointment-name !{appointment.name}
+          .appointment-time !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}

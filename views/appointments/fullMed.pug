@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  if user
+    .appointment.container.grey-text.text-darken-1
+      h5.center !{appointment.name}
+      .card-panel.appointmentFull.white.row
+        img(src='/img/med.png')
+        .appointment-details
+          .appointment-name Name: !{appointment.name}
+          .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+          .appointment-name !{appointment.mealTime}
+          .appointment-note Note: !{appointment.note}
+          if appointment.confirm == true
+            .appointment-confirm Status: Taken
+          else
+            .appointment-confirm Status: Not Taken
+    if appointment.confirm == false
+        .appointment-confirm
+            .confirm
+                button.a.modal-trigger(href="#modal2") Confirm 
+
+    #modal2.modal
+        .modal-content
+          h4 Confirm Medication
+          p Do you confirm you have taken this medication?
+        .modal-footer
+          a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
+          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/fullMed" +"/confirm" ,method="POST") 
+            button(type='submit', data-id=appointment._id) Yes
