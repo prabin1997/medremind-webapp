@@ -6,7 +6,6 @@
     "dev": "nodemon ./bin/www",
     "test": "NODE_ENV=test && ./node_modules/.bin/eslint . && node_modules/mocha/bin/mocha test"
   },
-  
   "engines": {
     "node": ">=6.x"
   },
@@ -24,6 +23,7 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.17.0",
     "express-validator": "^3.2.0",
+    "foreman": "^3.0.1",
     "locus": "^2.0.4",
     "material-design-icons": "^3.0.1",
     "moment": "^2.11.2",
