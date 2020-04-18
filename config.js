@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv-safe').load();
+//require('dotenv-safe').load();
 
 const cfg = {};
 
