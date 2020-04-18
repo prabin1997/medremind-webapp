@@ -43,7 +43,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
     * @param {array} appointments List of appointments.
     */
     function sendNotifications(appointments) {
-        const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
+        const client = require('twilio')(cfg.twilioAccountSid, cfg.twilioAuthToken);
         appointments.forEach(function(appointment) {
             // Create options to send the message
             const options = {
