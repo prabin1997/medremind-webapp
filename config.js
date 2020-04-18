@@ -2,8 +2,6 @@
 
 require('dotenv').config();
 
-require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-
 const cfg = {};
 
 // HTTP Port to run our web application
