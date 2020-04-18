@@ -8,7 +8,7 @@ services: mongodb
 env:
   global:
     - export TWILIO_ACCOUNT_SID=AC463ea05d352215bbece36eea3805b564
-    - export TWILIO_AUTH_TOKEN=152574c6659dfffddae809e8be08b3ef
+    - export TWILIO_AUTH_TOKEN=f7caa95007fefda5451e3c8c74706ba7
     - export TWILIO_PHONE_NUMBER=+12242577281
     - export MONGO_URL=mongodb://127.0.0.1:27017/appointment-reminders
     - export MONGO_URL_TEST=mongodb://127.0.0.1:27017/appointment-reminders
