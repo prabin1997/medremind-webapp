@@ -2,6 +2,8 @@
 
 require('serve-favicon');
 const express = require('express');
+const http = require('http');
+const enforce = require('express-sslify');
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -20,6 +22,9 @@ const router = express.Router();
 
 
 const app = express();
+
+// Use enforce.HTTPS({ trustProtoHeader: true }) since you're behind Heroku's reverse proxy
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
