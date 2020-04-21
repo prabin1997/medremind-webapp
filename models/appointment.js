@@ -51,7 +51,8 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
                 body: `Hi there. Just a reminder to take your ${appointment.name} medication.
-                Note: ${appointment.note} `,
+                       Take medication: ${appointment.mealTime}.
+                       Note: ${appointment.note} `, 
                 /* eslint-enable max-len */
             };
 
