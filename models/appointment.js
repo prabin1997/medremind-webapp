@@ -80,17 +80,16 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
     }
 };
 
+
 AppointmentSchema.statics.sendReminder = function(callback) {
   // now
   const searchDate = new Date();
 
   Appointment
     .find({"time": {$lte:searchDate}, confirm: "false"})
-    .then(function(appointments) {
-      appointments = appointments.filter(function(appointment) {
-              return appointment.requiresNotification(searchDate);
-      });
-      if (appointments.length > 0) {
+    .then(function(err, appointments) {
+      if (err) throw err; 
+      else{
         sendReminder(appointments);
       }
     });
