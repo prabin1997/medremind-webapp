@@ -85,12 +85,12 @@ AppointmentSchema.statics.sendReminder = function(callback) {
   const searchDate = new Date();
 
   Appointment
-    .find()
+    .find({"time": {$lte:searchDate}, confirm: "false"})
     .then(function(appointments) {
       appointments = appointments.filter(function(appointment) {
               return appointment.requiresNotification(searchDate);
       });
-      if ((appointment.confirm == false) || (appointment.time < searchDate)) {
+      if (appointments.length > 0) {
         sendReminder(appointments);
       }
     });
