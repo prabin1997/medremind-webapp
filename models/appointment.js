@@ -87,9 +87,8 @@ AppointmentSchema.statics.sendReminder = function(callback) {
 
   Appointment
     .find({"time": {$lte:searchDate}, confirm: "false"})
-    .then(function(err, appointments) {
-      if (err) throw err; 
-      else{
+    .then(function(appointments) {
+      if (appointments.length > 0) {
         sendReminder(appointments);
       }
     });
