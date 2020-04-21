@@ -26,6 +26,8 @@ const app = express();
 // Use enforce.HTTPS({ trustProtoHeader: true }) since you're behind Heroku's reverse proxy
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

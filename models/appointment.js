@@ -50,9 +50,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                 to: `+ ${appointment.phoneNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
-                body: `Hi there. Just a reminder to take your ${appointment.name} medication.
-                       Take medication: ${appointment.mealTime}.
-                       Note: ${appointment.note} `, 
+                body: `Hi there. Just a reminder to take your ${appointment.name} medication. \n Take medication: ${appointment.mealTime} \n Note: ${appointment.note} \n Click on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
                 /* eslint-enable max-len */
             };
 

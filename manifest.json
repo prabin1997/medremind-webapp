@@ -2,6 +2,7 @@
     "name": "Mediabetes Reminder",
     "short_name": "MedRemind",
     "start_url": "/users/home",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#FFE9D2",
     "theme_color": "#FFE1C4",

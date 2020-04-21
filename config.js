@@ -5,7 +5,7 @@ require('dotenv').config();
 const cfg = {};
 
 // HTTP Port to run web application
-cfg.port = process.env.PORT || 7805;
+cfg.port = process.env.PORT || 7808;
 
 // A random string that will help generate secure one-time passwords and
 // HTTP sessions
