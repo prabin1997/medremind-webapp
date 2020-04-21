@@ -17,7 +17,7 @@ const schedulerFactory = function() {
   };
 };
 
-const schedulerFactory = function() {
+const reminderFactory = function() {
   return {
     start: function() {
       new CronJob('0 */10 * * * *', function() {
@@ -31,3 +31,4 @@ const schedulerFactory = function() {
 
 
 module.exports = schedulerFactory();
+module.exports = reminderFactory();
