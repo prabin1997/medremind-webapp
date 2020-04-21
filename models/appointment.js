@@ -38,6 +38,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
       }
     });
 
+
     /**
     * Send messages to all appoinment owners via Twilio
     * @param {array} appointments List of appointments.
@@ -50,7 +51,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                 to: `+ ${appointment.phoneNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
-                body: `Hi there. Just a reminder to take your ${appointment.name} medication. \n Take medication: ${appointment.mealTime} \n Note: ${appointment.note} \n Click on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
+                body: `Hi there. Just a reminder to take your ${appointment.name} medication. \n Take medication: ${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
                 /* eslint-enable max-len */
             };
 
@@ -69,6 +70,8 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
             });
         });
 
+        
+
         // Don't wait on success/failure, just indicate all messages have been
         // queued for delivery
         if (callback) {
@@ -77,6 +80,61 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
     }
 };
 
+AppointmentSchema.statics.sendReminder = function(callback) {
+  // now
+  const searchDate = new Date();
+
+  Appointment
+    .find()
+    .then(function(appointments) {
+      appointments = appointments.filter(function(appointment) {
+              return appointment.requiresNotification(searchDate);
+      });
+      if ((appointment.confirm == false) || (appointment.time < searchDate)) {
+        sendReminder(appointments);
+      }
+    });
+
+ 
+
+    function sendReminder(appointments) {
+      const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
+      appointments.forEach(function(appointment) {
+          // Create options to send the message
+          const options = {
+              to: `+ ${appointment.phoneNumber}`,
+              from: cfg.twilioPhoneNumber,
+              /* eslint-disable max-len */
+              body: `Hi there. Just a reminder that you still have not taken your ${appointment.name} medication.\nIf you taken the medication pls click on this link to confirm: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
+              /* eslint-enable max-len */
+          };
+
+          // Send the message!
+          client.messages.create(options, function(err, response) {
+              if (err) {
+                  // Just log it for now
+                  console.error(err);
+              } else {
+                  // Log the last few digits of a phone number
+                  let masked = appointment.phoneNumber.substr(0,
+                      appointment.phoneNumber.length - 5);
+                  masked += '*****';
+                  console.log(`Message sent to ${masked}`);
+              }
+          });
+      });
+
+      // Don't wait on success/failure, just indicate all messages have been
+      // queued for delivery
+      if (callback) {
+        callback.call();
+      }
+  }
+};
+
+
+
 
 const Appointment = mongoose.model('appointment', AppointmentSchema);
 module.exports = Appointment;
+

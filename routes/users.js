@@ -83,6 +83,11 @@ router.get('/contact', function(req, res){
     res.render('contact');
 });
 
+//Contact page 
+router.get('/about', function(req, res){
+    res.render('about');
+});
+
 //login form
 router.get('/login', function(req, res){
     res.render('login');
