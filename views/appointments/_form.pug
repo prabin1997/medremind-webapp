@@ -18,8 +18,8 @@
   label(for='selectMeal') When to take the medication?
   select#selectDelta.form-control(name="mealTime", required='', value=appointment.mealTime)
     option(selected=appointment.notification == '', value='') Select a medication meal time
-    option(selected=appointment.notification == 'Pre-Meal', value='Pre-Meal') Pre-Meal
-    option(selected=appointment.notification == 'Post-Meal', value='Post-Meal') Post-Meal
+    option(selected=appointment.notification == 'Before Meal', value='Before Meal') Before Meal
+    option(selected=appointment.notification == 'After Meal', value='After Meal') After Meal
 #form-group
   label(for='selectTimeZone')  Timezone:
   select#selectTimeZone.form-control(name='timeZone', required='', value=appointment.timeZone)
@@ -28,4 +28,4 @@
       option(selected=zone == appointment.timeZone, value= zone) !{zone}
 #form-group
   label(for='inputNote') Note:
-  textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', required='', value=appointment.note)
+  textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', value=appointment.note)

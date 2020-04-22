@@ -54,6 +54,7 @@ router.post('/', function(req, res, next) {
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
   const createdUser = req.user._id;
   const userAdmin = req.user.adminReq;
+  const adminNumber = req.user.adminNumber;
   const note = req.body.note;
   const confirm = req.body.confirm;
 
@@ -64,6 +65,7 @@ router.post('/', function(req, res, next) {
                                        timeZone: timeZone,
                                        time: time,
                                        createdUser: createdUser,
+                                       adminNumber: adminNumber,
                                        userAdmin: userAdmin,
                                        note: note,
                                        confirm: confirm});

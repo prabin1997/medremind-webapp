@@ -13,6 +13,7 @@ const AppointmentSchema = new mongoose.Schema({
   timeZone: String,
   time: {type: Date, index: true},
   createdUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  adminNumber: {type: String, ref: 'number'},
   userAdmin: {type: String, ref: 'adminReq'},
   note: String,
   confirm: {type: Boolean, default: false}
@@ -51,7 +52,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                 to: `+ ${appointment.phoneNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
-                body: `Hi there. Just a reminder to take your ${appointment.name} medication.\nTake medication: ${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
+                body: `Hi there. Just a reminder to take your ${appointment.name} medication.\nMedication time: At ${moment(appointment.time).format('hh:mma')}-${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
                 /* eslint-enable max-len */
             };
 
