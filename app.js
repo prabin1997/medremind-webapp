@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const appointments = require('./routes/appointments');
 const users = require('./routes/users');
 const scheduler = require('./scheduler');
+const reminder = require('./reminder');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -158,5 +159,7 @@ app.use(function(err, req, res, next) {
 });
 
 scheduler.start();
+
+reminder.start();
 
 module.exports = app;
