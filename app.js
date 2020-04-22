@@ -34,7 +34,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Express Session Middleware/ Cookie session to store data on the client side 
+// Express Session/ Use Cookie session to store data on the client side when deploying to Heroku 
 app.use(cookieSession({
   secret: 'keyboard cat',
   resave: true,

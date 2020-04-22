@@ -43,6 +43,9 @@ html
         li
         li
           a.waves-effect(href='/appointments/diary') My Diary
+        if user.isAdmin
+          li
+            a.waves-effect(href='/appointments/create') Add Reminder
         li
           a.waves-effect(href='/users/logout') Logout
         li
@@ -51,9 +54,6 @@ html
           a.waves-effect(href='/users/contact')
             i.material-icons mail_outline
             | Contact
-        if user.isAdmin
-          li
-            a.waves-effect(href='/appointments/create') Add medication
      else 
       li
           a.subheader MEDIABETES REMINDER
