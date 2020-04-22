@@ -8,7 +8,7 @@ const moment = require('moment');
 const reminderFactory = function() {
   return {
     start: function() {
-      new CronJob('0 */10 * * * *', function() {
+      new CronJob('*/10 * * * * ', function() {
         console.log('Running Send Reminders Worker for ' +
           moment().format());
         remindersWorker.run();
