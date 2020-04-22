@@ -1,7 +1,7 @@
 'use strict';
 
 const CronJob = require('cron').CronJob;
-const notificationsWorker = require('./workers/notificationsWorker');
+const notificationsWorker = require('../workers/notificationsWorker');
 const moment = require('moment');
 
 const schedulerFactory = function() {

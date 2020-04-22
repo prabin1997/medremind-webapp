@@ -22,7 +22,7 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/:id/edit', function(req, res, next) {
+router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
@@ -32,7 +32,7 @@ router.get('/:id/edit', function(req, res, next) {
 });
 
 // GET: /appointments/create
-router.get('/create', function(req, res, next) {
+router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('appointments/create', {
     timeZones: getTimeZones(),
     appointment: new Appointment({name: '',
@@ -76,7 +76,7 @@ router.post('/', function(req, res, next) {
 });
 
 // GET: /appointments/:id/edit
-router.get('/:id/edit', function(req, res, next) {
+router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
@@ -86,7 +86,7 @@ router.get('/:id/edit', function(req, res, next) {
 });
 
 // POST: /appointments/:id/edit
-router.post('/:id/edit', function(req, res, next) {
+router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
@@ -117,7 +117,7 @@ router.post('/:id/edit', function(req, res, next) {
 });
 
 // POST: /appointments/:id/delete
-router.post('/:id/delete', function(req, res, next) {
+router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
 
   Appointment.remove({_id: id})
@@ -127,7 +127,7 @@ router.post('/:id/delete', function(req, res, next) {
 });
 
 // full med details page 
-router.get('/:id/fullMed', function(req, res, next) {
+router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
@@ -136,7 +136,7 @@ router.get('/:id/fullMed', function(req, res, next) {
     });
 });
 
-router.post('/:id/fullMed/confirm', function(req, res, next) {
+router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {

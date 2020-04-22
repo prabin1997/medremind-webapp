@@ -1,21 +1,21 @@
 'use strict';
 
 const CronJob = require('cron').CronJob;
-const remindersWorker = require('./workers/remindersWorker');
+const adminsWorker = require('../workers/adminsWorker');
 const moment = require('moment');
 
 
-const reminderFactory = function() {
+const adminReminderFactory = function() {
   return {
     start: function() {
       new CronJob('*/10 * * * *', function() {
-        console.log('Running Send Reminders Worker for ' +
+        console.log('Running Send Admin Worker for ' +
           moment().format());
-        remindersWorker.run();
+        adminsWorker.run();
       }, null, true, '');
     },
   };
 };
 
 
-module.exports = reminderFactory();
+module.exports = adminReminderFactory();

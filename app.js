@@ -11,8 +11,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const appointments = require('./routes/appointments');
 const users = require('./routes/users');
-const scheduler = require('./scheduler');
-const reminder = require('./reminder');
+const scheduler = require('./schedulers/scheduler');
+const reminder = require('./schedulers/reminder');
+const adminReminder = require('./schedulers/adminReminder');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -162,5 +163,8 @@ app.use(function(err, req, res, next) {
 scheduler.start();
 
 reminder.start();
+
+adminReminder.start();
+
 
 module.exports = app;
