@@ -2,6 +2,7 @@
 
 require('serve-favicon');
 const express = require('express');
+const cookieSession = require('cookie-session');
 const http = require('http');
 const enforce = require('express-sslify');
 const path = require('path');
@@ -33,8 +34,8 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Express Session Middleware
-app.use(session({
+// Express Session Middleware/ Cookie session to store data on the client side 
+app.use(cookieSession({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true
