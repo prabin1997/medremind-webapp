@@ -59,6 +59,9 @@ nav .sidenav-trigger{
   bottom: 0px;
   right: 0px;
   }
+  .med-add{
+    font-size: 30px;
+  }
   .med-edit a{
   overflow: hidden;
   width: 24px;
@@ -86,9 +89,9 @@ nav .sidenav-trigger{
   .appointment-time{
   font-size:0.9em;
   }
-  .appointment-confirm{
-    font-size:0.9em;
-    }
+  .appointment-details.appointment-confirm{
+  font-size:1em;
+  }
   .appointmentFull{
     margin-top: 30px;
     }
