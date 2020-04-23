@@ -5,7 +5,6 @@ const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
 const User = require('../models/user');
-const flash = require('express-flash-notification');
 const router = new express.Router();
 
 
