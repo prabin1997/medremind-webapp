@@ -5,6 +5,7 @@ const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
 const User = require('../models/user');
+const Swal = require('sweetalert2');
 const router = new express.Router();
 
 
@@ -138,10 +139,26 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const msg = ["Diabetes is not terrible and there are many things you can do to prevent problems from diabetes, such as monitoring blood glucose, watching your diet, keeping fit, and taking pills regularly.",
+  "Try brisk walking – a convenient, safe and cost-effective way of exercising! It’s good for your heart and will help control blood glucose.",
+  "Taking diabetes medications or injecting insulin regularly can help control your blood glucose level.",
+  "Afraid of testing blood glucose because it hurts? Try to test on the sides of your fingertips or rotate your fingers, which can help to minimise pain.",
+  "The effect of regular activity is also known to help increase insulin sensitivity, which can be useful for all types of diabetes, particularly type 2 diabetes.",
+  "Taking the time to draw up a meal plan can save you time and stress in the long run. Eating meals on a schedule can help keep your blood sugar levels where they need to be.",
+  "Diabetics need to watch what they eat to prevent spikes in their blood sugar, but that doesn’t mean they have to avoid food they love."
+  ];
+  const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
-      res.redirect('/');
+      Swal.fire(
+        'Sucess',
+         randomMsg
+        ).then(function(result) {
+          if (result.value) {
+            location.assign('/')
+      }
     });
+  });
 });
 
 // patient diary page
