@@ -29,6 +29,9 @@ block content
           a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
           form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/delete",method="POST") 
             button(type='submit', data-id=appointment._id) Yes
+    if user.isAdmin
+      .med-add
+        a.center-align(href="/appointments/create").i.material-icons add_circle 
 
 
 
