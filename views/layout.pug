@@ -76,7 +76,6 @@ html
     .container
       block content
     .container
-      Materialize.toast({{ session('messages') }}, duration, 'rounded')
       != messages('message', locals)
       if errors
         each error, i in errors
