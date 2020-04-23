@@ -5,7 +5,7 @@ const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
 const User = require('../models/user');
-const Swal = require('sweetalert2');
+const flash = require('express-flash-notification');
 const router = new express.Router();
 
 
@@ -149,16 +149,13 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
-  Swal.fire({
-    title: 'Successfully Confirmation!',
-    text: randomMsg,
-    type: 'success',
-    confirmButtonText: 'Go back to Home'
-   }).then(function(result) {
-        if (result.value) {
-          res.redirect('/');
-    }
-  });
+    .then(function() {
+      req.flash({
+        type: 'info',
+        message: randomMsg,
+        redirect: '/'
+      })
+    });
 });
 
 // patient diary page

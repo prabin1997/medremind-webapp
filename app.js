@@ -20,7 +20,7 @@ const session = require('express-session');
 const passport = require('passport');
 const config = require('./cfig/database');
 const moment = require('moment');
-const Swal = require('sweetalert2');
+const flash = require('express-flash-notification');
 const router = express.Router();
 
 
@@ -90,6 +90,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(flash(app));
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
 
