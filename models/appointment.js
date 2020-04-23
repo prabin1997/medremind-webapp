@@ -10,7 +10,7 @@ const AppointmentSchema = new mongoose.Schema({
   phoneNumber: String,
   notification: Number,
   mealTime: String,
-  timeZone: {type: String, value: 'GMT'},
+  timeZone: {type: String, default: 'GMT'},
   time: {type: Date, index: true},
   createdUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
   adminNumber: {type: String, ref: 'number'},
