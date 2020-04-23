@@ -141,7 +141,8 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   "Diabetics need to watch what they eat to prevent spikes in their blood sugar, but that doesn’t mean they have to avoid food they love."
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
-  const successMsg = "Sucessfully confirmed medication\rMessage of the day: ";
+  const successMsg = "Sucessfully confirmed medication\
+  Message of the day: ";
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
       req.flash('success', successMsg + randomMsg);
