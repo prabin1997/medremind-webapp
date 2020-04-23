@@ -13,7 +13,7 @@ const router = new express.Router();
   //return momentTimeZone.tz.names();
 //};
 // GET: /appointments
-router.get('/', ensureAuthenticated, function(req, res, next) {
+router.get('/', checkAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
@@ -42,7 +42,7 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 });
 
 // POST: /appointments
-router.post('/', function(req, res, next) {
+router.post('/', ensureAuthenticated, function(req, res, next) {
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
   const notification = req.body.notification;
@@ -141,7 +141,8 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   "Diabetics need to watch what they eat to prevent spikes in their blood sugar, but that doesn’t mean they have to avoid food they love."
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
-  const successMsg = "Sucessfully confirmed medication\nMessage of the day: ";
+  const successMsg = "Sucessfully confirmed medication\
+  Message of the day: ";
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
       req.flash('success', successMsg + randomMsg);
@@ -160,6 +161,15 @@ router.get('/appointments/diary', ensureAuthenticated, function(req, res) {
 });
 
 function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    req.flash('error', 'Please login to access this page');
+    res.redirect('/users/login');
+  }
+}
+
+function checkAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();
   } else {

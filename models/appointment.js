@@ -13,6 +13,7 @@ const AppointmentSchema = new mongoose.Schema({
   timeZone: {type: String, default: 'GMT'},
   time: {type: Date, index: true},
   createdUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  created_at: { type: Date, default: Date.now },
   adminNumber: {type: String, ref: 'number'},
   userAdmin: {type: String, ref: 'adminReq'},
   note: String,
