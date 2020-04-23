@@ -77,11 +77,9 @@ html
       block content
     .container
         != messages('message', locals)
-            .material-icons check
       if errors
         each error, i in errors
           div(class="materialert error") #{error.msg}
-            .material-icons error_outline
 
      
       // /row

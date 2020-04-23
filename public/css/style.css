@@ -139,9 +139,6 @@ nav .sidenav-trigger{
   left: -15px;
   height: 100px;
 }
-  .materialert .material-icons{
-    margin-right: 10px;
-  }
   .materialert.success{
     background-color: #43a047;
     color: #fff;
