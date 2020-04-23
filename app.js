@@ -15,7 +15,7 @@ const scheduler = require('./schedulers/scheduler');
 const reminder = require('./schedulers/reminder');
 const adminReminder = require('./schedulers/adminReminder');
 const expressValidator = require('express-validator');
-const flash = require('connect-flash');
+//const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const config = require('./cfig/database');
@@ -45,11 +45,11 @@ app.use(cookieSession({
 
 
 // Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
+//app.use(require('connect-flash')());
+//app.use(function (req, res, next) {
+  //res.locals.messages = require('express-messages')(req, res);
+  //next();
+//});
 
 // Express Validator Middleware
 app.use(expressValidator({
