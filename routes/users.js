@@ -14,7 +14,6 @@ router.get('/register', function(req, res){
 //register process
 router.post('/register', function(req,res){
     const name = req.body.name;
-    const email = req.body.email;
     const number = req.body.number;
     const username = req.body.username;
     const password = req.body.password;
@@ -22,8 +21,6 @@ router.post('/register', function(req,res){
     const adminReq = req.body.adminReq;
 
     req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('email', 'Email is required').notEmpty();
-    req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('number', 'Phone number is required').notEmpty();
     req.checkBody('number', 'Phone number is not valid').isNumeric();
     req.checkBody('username', 'Username is required').notEmpty();
@@ -39,7 +36,6 @@ router.post('/register', function(req,res){
     } else {
         let newUser = new User({
             name:name,
-            email:email,
             number:number,
             username:username,
             password:password,

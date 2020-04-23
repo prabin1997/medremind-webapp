@@ -149,8 +149,7 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
-      req.flash('success', randomMsg);
-      res.redirect('/');
+      res.redirect('/').with(['messages', randomMsg ]);
     });
 });
 

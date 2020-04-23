@@ -134,37 +134,38 @@ nav .sidenav-trigger{
 
     }
 .msg{
-  width:100%;
+  position: relative;
+  top:30px;
+  left: -15px;
+  height: 100px;
   border: 1px solid;
-  padding:10px;
-  margin: 20px;
-  color: grey;
-}
-.msg-error{
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
 
-.msg-success_msg{
-  color: #3c763d;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
 }
-.index-title{
-  position: fixed; 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: black;
-}​
-
-.container{
-  max-width: 960px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 3rem;
+  .msg-error{
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  
+  .msg-success_msg{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  .index-title{
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: black;
+  }​
+ 
+  .container{
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 3rem;
 }
 
 #showcase {
