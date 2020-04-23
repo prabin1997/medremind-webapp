@@ -79,7 +79,7 @@ html
       != messages('message', locals)
       if errors
         each error, i in errors
-          div(class="materialert materialert-error") #{error.msg}
+          div(class="msg msg-error") #{error.msg}
      
       // /row
       script(src='/loader.js')
