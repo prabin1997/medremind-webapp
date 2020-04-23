@@ -20,6 +20,7 @@ const session = require('express-session');
 const passport = require('passport');
 const config = require('./cfig/database');
 const moment = require('moment');
+const Swal = require('sweetalert2');
 const router = express.Router();
 
 
