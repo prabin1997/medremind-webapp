@@ -21,9 +21,6 @@ block content
             a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
           .med-delete
             a.modal-trigger(href="#modal1").i.material-icons delete_outline
-    if user.isAdmin
-      .med-add
-        a.center-align(href="/appointments/create").i.material-icons add_circle 
       #modal1.modal
         .modal-content
           h4 Delete Medication
