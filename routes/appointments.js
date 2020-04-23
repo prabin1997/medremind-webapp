@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const momentTimeZone = require('moment-timezone');
+//const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
 const User = require('../models/user');
@@ -9,9 +9,9 @@ const router = new express.Router();
 
 
 
-const getTimeZones = function() {
-  return momentTimeZone.tz.names();
-};
+//const getTimeZones = function() {
+  //return momentTimeZone.tz.names();
+//};
 // GET: /appointments
 router.get('/', ensureAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
@@ -26,20 +26,17 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/edit', {timeZones: getTimeZones(),
-                                       appointment: appointment});
+      res.render('appointments/edit', {appointment: appointment});
     });
 });
 
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('appointments/create', {
-    timeZones: getTimeZones(),
     appointment: new Appointment({name: '',
                                   phoneNumber: '',
                                   notification: '',
                                   mealTime: '',
-                                  timeZone: '',
                                   time: '',
                                   note: ''})});
 });
@@ -80,8 +77,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/edit', {timeZones: getTimeZones(),
-                                       appointment: appointment});
+      res.render('appointments/edit', {appointment: appointment});
     });
 });
 
@@ -92,7 +88,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const phoneNumber = req.body.phoneNumber;
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
-  const timeZone = req.body.timeZone;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
   const note = req.body.note;
 
@@ -103,7 +98,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
       appointment.phoneNumber = phoneNumber;
       appointment.notification = notification;
       appointment.mealTime = mealTime;
-      appointment.timeZone = timeZone;
       appointment.time = time;
       appointment.note = note;
 
@@ -147,7 +141,7 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   "Diabetics need to watch what they eat to prevent spikes in their blood sugar, but that doesn’t mean they have to avoid food they love."
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
-  const successMsg = "Sucessfully confirmed medication \n";
+  const successMsg = "Sucessfully confirmed medication\nMessage of the day: ";
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
       req.flash('success', successMsg + randomMsg);

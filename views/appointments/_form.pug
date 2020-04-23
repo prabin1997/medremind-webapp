@@ -21,11 +21,5 @@
     option(selected=appointment.notification == 'Before Meal', value='Before Meal') Before Meal
     option(selected=appointment.notification == 'After Meal', value='After Meal') After Meal
 #form-group
-  label(for='selectTimeZone')  Timezone:
-  select#selectTimeZone.form-control(name='timeZone', required='', value=appointment.timeZone)
-    each zone in timeZones
-      option()
-      option(selected=zone == appointment.timeZone, value= zone) !{zone}
-#form-group
   label(for='inputNote') Note:
   textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', value=appointment.note)
