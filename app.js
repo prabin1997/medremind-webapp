@@ -15,12 +15,12 @@ const scheduler = require('./schedulers/scheduler');
 const reminder = require('./schedulers/reminder');
 const adminReminder = require('./schedulers/adminReminder');
 const expressValidator = require('express-validator');
-//const flash = require('connect-flash');
+const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const config = require('./cfig/database');
 const moment = require('moment');
-const flash = require('express-flash-notification');
+const nflash = require('express-flash-notification');
 const router = express.Router();
 
 
@@ -45,11 +45,11 @@ app.use(cookieSession({
 
 
 // Express Messages Middleware
-//app.use(require('connect-flash')());
-//app.use(function (req, res, next) {
-  //res.locals.messages = require('express-messages')(req, res);
-  //next();
-//});
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
 
 // Express Validator Middleware
 app.use(expressValidator({
@@ -90,7 +90,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(flash(app));
+app.use(nflash(app));
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
 
