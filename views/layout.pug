@@ -76,10 +76,13 @@ html
     .container
       block content
     .container
-      != messages('message', locals)
+        != messages('message', locals)
+            .material-icons check
       if errors
         each error, i in errors
-          div(class="alert alert-danger") #{error.msg}
+          div(class="materialert error") #{error.msg}
+            .material-icons error_outline
+
      
       // /row
       script(src='/loader.js')
