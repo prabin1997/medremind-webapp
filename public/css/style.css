@@ -138,8 +138,6 @@ nav .sidenav-trigger{
   top:30px;
   left: -15px;
   height: 100px;
-  border: 1px solid;
-
 }
 .msg.msg-error{
     color: #a94442;
@@ -147,7 +145,7 @@ nav .sidenav-trigger{
     border-color: #ebccd1;
   }
   
-.msg.msg-success_msg{
+.msg.msg-success_message{
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
