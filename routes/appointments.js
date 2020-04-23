@@ -149,17 +149,15 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
-    .then(function() {
-      Swal.fire({
-        title: 'Successfully Confirmation!',
-        text: randomMsg,
-        type: 'success',
-        confirmButtonText: 'Go back to Home'
-       }).then(function(result) {
-          if (result.value) {
-            location.assign('/')
-      }
-    });
+  Swal.fire({
+    title: 'Successfully Confirmation!',
+    text: randomMsg,
+    type: 'success',
+    confirmButtonText: 'Go back to Home'
+   }).then(function(result) {
+        if (result.value) {
+          res.redirect('/');
+    }
   });
 });
 
