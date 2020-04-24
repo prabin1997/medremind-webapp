@@ -2,9 +2,6 @@
   label(for='inputName') Medication name:
   input#inputName.form-control(name="name", type ='text', placeholder='Name', required='', data-parsley-maxlength='20', data-parsley-maxlength-message="This field can't have more than 20 characters", value=appointment.name)
 #form-group
-  label(for='inputPhoneNumber') Phone number:
-  input#inputPhoneNumber.form-control(name="phoneNumber", type ='number', placeholder='Phone Number', required='', value=appointment.phoneNumber)
-#form-group
   label(for='time') Medication date:
   input#inputDate.form-control(name="time", type ='text', placeholder='Pick a Date', required='', value=moment(appointment.time).format('MM-DD-YYYY hh:mma'))
 #form-group
