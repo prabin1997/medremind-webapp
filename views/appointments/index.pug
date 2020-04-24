@@ -22,7 +22,7 @@ block content
               a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
             .med-delete
               a.modal-trigger(href="#modal1").i.material-icons delete_outline
-      if appointment.confirm == false
+      if user.isAdmin && appointment.confirm == false
         .card-panel.appointment.white.row
           img(src='/img/med.png')
           .appointment-details
