@@ -48,25 +48,25 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 // POST: /appointments
 router.post('/', ensureAuthenticated, function(req, res, next) {
   const name = req.body.name;
-  const patientNumber = req.body.patientNumber;
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const timeZone = req.body.timeZone;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
   const createdUser = req.user._id;
   const userAdmin = req.user.adminReq;
-  const adminNumber = req.user.number;
+  const adminNumber = req.user.adminNumber;
+  const patientNumber = req.user.number;
   const note = req.body.note;
   const confirm = req.body.confirm;
 
   const appointment = new Appointment({name: name,
-                                       patientNumber: patientNumber,
                                        notification: notification,
                                        mealTime: mealTime,
                                        timeZone: timeZone,
                                        time: time,
                                        createdUser: createdUser,
                                        adminNumber: adminNumber,
+                                       patientNumber: patientNumber,
                                        userAdmin: userAdmin,
                                        note: note,
                                        confirm: confirm});
