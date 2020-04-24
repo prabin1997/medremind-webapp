@@ -76,7 +76,6 @@ app.use(passport.session());
 
 app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
-  res.locals.confirm = req.confirm || null;
   res.locals.isAdmin = req.isAdmin || null;
   res.locals.appointment = req.appointment || null;
   next();

@@ -15,10 +15,15 @@ const router = new express.Router();
 // GET: /appointments
 router.get('/', checkAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
+    const isadmin = req.user.isAdmin;
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
+       if(isadmin == true){
        res.render('appointments/index', {user: usera , appointments: appointments});
+       } else if(isadmin == false){
+       res.render('appointments/pindex', {user: usera , appointments: appointments});
+       }
     });
 });
 
