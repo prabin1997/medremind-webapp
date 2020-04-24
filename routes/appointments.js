@@ -43,7 +43,7 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 // POST: /appointments
 router.post('/', ensureAuthenticated, function(req, res, next) {
   const name = req.body.name;
-  const patienteNumber = req.body.patientNumber;
+  const patientNumber = req.body.patientNumber;
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const timeZone = req.body.timeZone;
