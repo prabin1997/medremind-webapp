@@ -8,7 +8,7 @@ block content
             .card-panel.appointment.white.row
                 img(src='/img/med.png')
                 .appointment-details
-                .appointment-name Name: !{appointment.name}
-                .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-                .appointment-arrow
-                    a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
+                    .appointment-name Name: !{appointment.name}
+                    .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+                    .appointment-arrow
+                        a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward

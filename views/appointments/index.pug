@@ -4,7 +4,7 @@ block content
   .appointment.container.grey-text.text-darken-1
     h5.center Medications
   each appointment in appointments
-    if isAdmin
+    if user.isAdmin
       .card-panel.appointment.white.row
         img(src='/img/med.png')
         .appointment-details
