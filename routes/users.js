@@ -54,28 +54,14 @@ router.post('/register', function(req,res){
                         newUser.adminReq = req.body.adminCode;
                         newUser.isAdmin = true;  
                 }
-                User.find({$or: [{number: number},{adminNumber: adminNumber}]}, function (err, docs) {
-                    if (docs.length!=0){
-                        //console.log(req.body.email);
-                        // Check record has same username as you are using in find
-                        if(docs[0].adminNumber == adminNumber){
-                            req.flash('error', "Admin number already exist");
-                        }
-                        // Else Check record has same patient number as you are using in find
-                        else if(docs[0].number == number){
-                            req.flash('error', "Patient number Already exist");
-                        }
-                    }else{
-                        newUser.password = hash;
-                        newUser.save(function(err){
-                            if(err){
-                                console.log(err);
-                                return;   
-                            } else {
-                                req.flash('success', 'You are now registered and can log in');
-                                res.redirect('/users/login');
-                            }
-                        });
+                newUser.password = hash;
+                newUser.save(function(err){
+                    if(err){
+                        console.log(err);
+                        return;   
+                    } else {
+                        req.flash('success', 'You are now registered and can log in');
+                        res.redirect('/users/login');
                     }
                 });
             });
