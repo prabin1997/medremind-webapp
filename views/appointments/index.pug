@@ -5,22 +5,23 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center Medications
     each appointment in appointments
-      .card-panel.appointment.white.row
-        img(src='/img/med.png')
-        .appointment-details
-          .appointment-name Name: !{appointment.name}
-          .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-          if user.isAdmin & appointment.confirm == true
-            .appointment-confirm Status: Taken
-          if user.isAdmin & appointment.confirm == false
-            .appointment-confirm Status: Not Taken
-          .appointment-arrow
-            a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
-        if user.isAdmin
-          .med-edit
-            a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
-          .med-delete
-            a.modal-trigger(href="#modal1").i.material-icons delete_outline
+      if user.confirm == true && user.confirm && appointment.confirm == false 
+        .card-panel.appointment.white.row
+          img(src='/img/med.png')
+          .appointment-details
+            .appointment-name Name: !{appointment.name}
+            .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+            if user.isAdmin & appointment.confirm == true
+              .appointment-confirm Status: Taken
+            if user.isAdmin & appointment.confirm == false
+              .appointment-confirm Status: Not Taken
+            .appointment-arrow
+              a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
+          if user.isAdmin
+            .med-edit
+              a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
+            .med-delete
+              a.modal-trigger(href="#modal1").i.material-icons delete_outline
       #modal1.modal
         .modal-content
           h4 Delete Medication
