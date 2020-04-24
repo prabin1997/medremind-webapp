@@ -7,14 +7,14 @@ const Twilio = require('twilio');
 
 const AppointmentSchema = new mongoose.Schema({
   name: String,
-  phoneNumber: String,
   notification: Number,
   mealTime: String,
   timeZone: {type: String, default: 'GMT'},
   time: {type: Date, index: true},
   createdUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
   created_at: { type: Date, default: Date.now },
-  adminNumber: {type: String, ref: 'number'},
+  adminNumber: {type: String, ref: 'adminNumber'},
+  patientNumber: {type: String, ref: 'number'},
   userAdmin: {type: String, ref: 'adminReq'},
   note: String,
   confirm: {type: Boolean, default: false}
@@ -50,7 +50,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
         appointments.forEach(function(appointment) {
             // Create options to send the message
             const options = {
-                to: `+ ${appointment.phoneNumber}`,
+                to: `+ ${appointment.patientNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
                 body: `Hi there. Just a reminder to take your ${appointment.name} medication.\nMedication time: At ${moment(appointment.time).format('hh:mma')} - ${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
@@ -64,8 +64,8 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                     console.error(err);
                 } else {
                     // Log the last few digits of a phone number
-                    let masked = appointment.phoneNumber.substr(0,
-                        appointment.phoneNumber.length - 5);
+                    let masked = appointment.patientNumber.substr(0,
+                        appointment.patientNumber.length - 5);
                     masked += '*****';
                     console.log(`Message sent to ${masked}`);
                 }
@@ -103,7 +103,7 @@ AppointmentSchema.statics.sendReminder = function(callback) {
       appointments.forEach(function(appointment) {
           // Create options to send the message
           const options = {
-              to: `+ ${appointment.phoneNumber}`,
+              to: `+ ${appointment.patientNumber}`,
               from: cfg.twilioPhoneNumber,
               /* eslint-disable max-len */
               body: `Hi there. Just a reminder that you still have not taken your ${appointment.name} medication.\nIf you taken the medication please click on this link to confirm: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
@@ -117,8 +117,8 @@ AppointmentSchema.statics.sendReminder = function(callback) {
                   console.error(err);
               } else {
                   // Log the last few digits of a phone number
-                  let masked = appointment.phoneNumber.substr(0,
-                      appointment.phoneNumber.length - 5);
+                  let masked = appointment.patientNumber.substr(0,
+                      appointment.patientNumber.length - 5);
                   masked += '*****';
                   console.log(`Message sent to ${masked}`);
               }
@@ -167,8 +167,8 @@ AppointmentSchema.statics.sendAdminReminder = function(callback) {
                   console.error(err);
               } else {
                   // Log the last few digits of a phone number
-                  let masked = appointment.phoneNumber.substr(0,
-                      appointment.phoneNumber.length - 5);
+                  let masked = appointment.adminNumber.substr(0,
+                      appointment.adminNumber.length - 5);
                   masked += '*****';
                   console.log(`Message sent to ${masked}`);
               }

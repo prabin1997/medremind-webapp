@@ -15,14 +15,15 @@ router.get('/register', function(req, res){
 router.post('/register', function(req,res){
     const name = req.body.name;
     const number = req.body.number;
+    const adminNumber = req.body.adminNumber;
     const username = req.body.username;
     const password = req.body.password;
     const password2 = req.body.password2;
     const adminReq = req.body.adminReq;
 
     req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('number', 'Phone number is required').notEmpty();
     req.checkBody('number', 'Phone number is not valid').isNumeric();
+    req.checkBody('adminNumber', 'Phone number is not valid').isNumeric();
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
@@ -37,6 +38,7 @@ router.post('/register', function(req,res){
         let newUser = new User({
             name:name,
             number:number,
+            adminNumber:adminNumber,
             username:username,
             password:password,
             adminReq:adminReq

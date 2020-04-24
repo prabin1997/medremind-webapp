@@ -34,7 +34,6 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('appointments/create', {
     appointment: new Appointment({name: '',
-                                  phoneNumber: '',
                                   notification: '',
                                   mealTime: '',
                                   time: '',
@@ -44,7 +43,7 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 // POST: /appointments
 router.post('/', ensureAuthenticated, function(req, res, next) {
   const name = req.body.name;
-  const phoneNumber = req.body.phoneNumber;
+  const patienteNumber = req.body.patientNumber;
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const timeZone = req.body.timeZone;
@@ -56,7 +55,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   const confirm = req.body.confirm;
 
   const appointment = new Appointment({name: name,
-                                       phoneNumber: phoneNumber,
+                                       patientNumber: patientNumber,
                                        notification: notification,
                                        mealTime: mealTime,
                                        timeZone: timeZone,
@@ -85,7 +84,6 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const name = req.body.name;
-  const phoneNumber = req.body.phoneNumber;
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
@@ -95,7 +93,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   Appointment.findOne({_id: id})
     .then(function(appointment) {
       appointment.name = name;
-      appointment.phoneNumber = phoneNumber;
       appointment.notification = notification;
       appointment.mealTime = mealTime;
       appointment.time = time;
