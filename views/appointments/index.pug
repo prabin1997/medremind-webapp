@@ -5,7 +5,7 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center Medications
     each appointment in appointments
-      if user.isAdmin == true && user.isAdmin && appointment.confirm == false 
+      if user.isAdmin
         .card-panel.appointment.white.row
           img(src='/img/med.png')
           .appointment-details
@@ -22,6 +22,14 @@ block content
               a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
             .med-delete
               a.modal-trigger(href="#modal1").i.material-icons delete_outline
+      if appointment.confirm == false
+        .card-panel.appointment.white.row
+          img(src='/img/med.png')
+          .appointment-details
+            .appointment-name Name: !{appointment.name}
+            .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+            .appointment-arrow
+              a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
       #modal1.modal
         .modal-content
           h4 Delete Medication
