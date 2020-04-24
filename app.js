@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const appointments = require('./routes/appointments');
 const users = require('./routes/users');
+const medications = require('./routes/medications');
 const scheduler = require('./schedulers/scheduler');
 const reminder = require('./schedulers/reminder');
 const adminReminder = require('./schedulers/adminReminder');
@@ -96,6 +97,7 @@ app.locals.moment = require('moment');
 
 app.use('/users', users);
 app.use('/appointments', appointments);
+app.use('/medications', medications);
 app.use('/', appointments);
 
 

@@ -4,6 +4,7 @@ const express = require('express');
 //const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
+const Medication = require('../models/medication');
 const User = require('../models/user');
 const router = new express.Router();
 
@@ -37,6 +38,16 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
+  const user = req.user.adminReq;
+  Medication.distinct("name".where("adminCode").equals(user),  function(error, result){        
+    result.sort();
+    var medList = document.getElementById('medList');
+    for(var i in result){
+      var option=document.createElement("option");
+      option.text=result[i];
+      medList.add(option, null);
+    }
+  });
   res.render('appointments/create', {
     appointment: new Appointment({name: '',
                                   notification: '',
