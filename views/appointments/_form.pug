@@ -1,8 +1,8 @@
 #form-group
   label(for='inputName') Medication name:
   select.selectDelta.form-control(name="name", required='', value=appointment.name)
-    each meds, i in dropdownVals
-      option #{i} #{meds}
+    each meds in dropdownVals
+      option #{meds}
 #form-group
   label(for='time') Medication date:
   input#inputDate.form-control(name="time", type ='text', placeholder='Pick a Date', required='', value=moment(appointment.time).format('MM-DD-YYYY hh:mma'))
