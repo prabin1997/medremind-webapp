@@ -25,7 +25,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
                                          createdUser: createdUser});
     medication.save()
       .then(function() {
-        res.redirect('/');
+        res.redirect('medications/viewMed');
       });
   });
 
