@@ -6,7 +6,7 @@ const Medication = require('../models/medication');
 const router = new express.Router();
 
 //register frorm
-router.get('/medications/addMed', function(req, res){
+router.get('/addMed', function(req, res){
     res.render('medications/addMed');
 });
 
