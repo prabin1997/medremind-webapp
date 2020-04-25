@@ -30,7 +30,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   });
 
 // view med page
-router.get('/medications/viewMed', ensureAuthenticated, function(req, res) {
+router.get('/viewMed', ensureAuthenticated, function(req, res) {
     const user = req.user.adminReq;
     const usera = req.user;
     Medication.find().where('adminCode').equals(user)
@@ -38,7 +38,7 @@ router.get('/medications/viewMed', ensureAuthenticated, function(req, res) {
        res.render('medications/viewMed', {user: usera , medications: medications});
     });
   });
-  
+
 function ensureAuthenticated(req, res, next){
 if(req.isAuthenticated()){
     return next();
