@@ -79,6 +79,7 @@ app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
   res.locals.isAdmin = req.isAdmin || null;
   res.locals.appointment = req.appointment || null;
+  res.locals.medication = req.medication || null;
   next();
 });
 
