@@ -12,7 +12,7 @@ router.get('/addMed', function(req, res){
                                    quantity: ''})});
 });
 
-router.post('/medications/addMed', ensureAuthenticated, function(req, res, next) {
+router.post('/', ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
@@ -25,7 +25,7 @@ router.post('/medications/addMed', ensureAuthenticated, function(req, res, next)
                                          createdUser: createdUser});
     medication.save()
       .then(function() {
-        res.redirect('/medications/viewMed');
+        res.redirect('/');
       });
   });
 
