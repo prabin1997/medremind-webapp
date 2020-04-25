@@ -48,7 +48,9 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
                                   mealTime: '',
                                   time: '',
                                   note: ''})});
-  });
+  }).catch(err => {
+    console.log(err)
+  })
 });
 
 // POST: /appointments
