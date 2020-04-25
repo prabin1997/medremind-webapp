@@ -42,10 +42,15 @@ html
           a.waves-effect(href='/users/learn') Type 2 diabetes
         li
         li
+          a.waves-effect(href='/medications/viewMed') My Medication
+        li
+        li
           a.waves-effect(href='/appointments/diary') My Diary
         if user.isAdmin
           li
             a.waves-effect(href='/appointments/create') Add Reminder
+          li
+            a.waves-effect(href='/medications/addMed') Add Medication
         li
           a.waves-effect(href='/users/logout') Logout
         li
