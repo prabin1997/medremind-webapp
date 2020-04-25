@@ -12,10 +12,6 @@ router.get('/addMed', function(req, res){
                                    quantity: ''})});
 });
 
-router.get('/viewMed', function(req, res){
-    res.render('medications/viewMed');
-});
-
 router.post('/', ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const quantity = req.body.quantity;
@@ -33,10 +29,16 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
       });
   });
 
-  router.get('/viewMed', function(req, res){
-    res.render('medications/viewMed');
-});
-
+// view med page
+router.get('/medications/viewMed', ensureAuthenticated, function(req, res) {
+    const user = req.user.adminReq;
+    const usera = req.user;
+    Medication.find().where('adminCode').equals(user)
+     .then(function(medications) {
+       res.render('medications/viewMed', {user: usera , medications: medications});
+    });
+  });
+  
 function ensureAuthenticated(req, res, next){
 if(req.isAuthenticated()){
     return next();
