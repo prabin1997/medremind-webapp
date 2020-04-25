@@ -1,8 +1,7 @@
 #form-group
   label(for='inputName') Medication name: 
-  select.selectDelta.form-control(name="name", required='', value=appointment.name)
+  select.selectDelta.form-control(name="name", required='' placeholder='Select medication', value=appointment.name)
     each meds in dropdownVals
-      option(selected=appointment.name == '', value='') Select a medication
       option #{meds}
 #add-med
   a(href="/medications/addMed") Add Medication

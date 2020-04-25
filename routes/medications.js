@@ -39,6 +39,15 @@ router.get('/viewMed', ensureAuthenticated, function(req, res) {
     });
   });
 
+// POST: /appointments/:id/delete
+router.post('/:id/viewMed/delete', ensureAuthenticated, function(req, res, next) {
+    const id = req.params.id;
+    Medication.remove({_id: id})
+      .then(function() {
+        res.redirect('/');
+      });
+  });
+
 function ensureAuthenticated(req, res, next){
 if(req.isAuthenticated()){
     return next();
