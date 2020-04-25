@@ -35,3 +35,5 @@ if(req.isAuthenticated()){
     res.redirect('/users/login');
 }
 }
+
+module.exports = router;
