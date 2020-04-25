@@ -26,3 +26,12 @@ router.post('/addMed', ensureAuthenticated, function(req, res, next) {
         res.redirect('/medications/viewMed');
       });
   });
+
+function ensureAuthenticated(req, res, next){
+if(req.isAuthenticated()){
+    return next();
+} else {
+    req.flash('error', 'Please login to access this page');
+    res.redirect('/users/login');
+}
+}
