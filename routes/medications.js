@@ -7,7 +7,9 @@ const router = new express.Router();
 
 //register frorm
 router.get('/addMed', function(req, res){
-    res.render('medications/addMed');
+    res.render('medications/addMed', {
+        medication: new Medication({name: '',
+                                   quantity: ''})});
 });
 
 router.post('/medications/addMed', ensureAuthenticated, function(req, res, next) {
