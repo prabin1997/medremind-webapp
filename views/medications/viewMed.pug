@@ -1,13 +1,11 @@
 extends ../layout
 
 block content
-    .appointment.container.grey-text.text-darken-1
+    .medication.container.grey-text.text-darken-1
         h5.center My Medications
     each medication in medications
-        .card-panel.appointment.white.row
+        .card-panel.medication.white.row
             img(src='/img/med.png')
-            .appointment-details
-                .appointment-name Name: !{medication.name}
-                .appointment-time Time: !{medication.quantity}
-                .appointment-arrow
-                    a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
+            .medication-details
+                .medication-name Name: !{medication.name}
+                .medication-time Quantity: !{medication.quantity}

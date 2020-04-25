@@ -8,13 +8,13 @@ block content
         img(src='/img/med.png')
         .appointment-details
           .appointment-name Name: !{appointment.name}
-          .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-          .appointment-name !{appointment.mealTime}
+          .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+          .appointment-name Take Medication: !{appointment.mealTime}
           .appointment-note Note: !{appointment.note}
           if appointment.confirm == true
-            .appointment-confirm Status: Taken
+            .appointment-name Status: Taken
           else
-            .appointment-confirm Status: Not Taken
+            .appointment-name Status: Not Taken
     if appointment.confirm == false
         .appointment-confirm
             .confirm
