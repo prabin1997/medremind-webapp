@@ -16,11 +16,11 @@ block content
         if user.isAdmin
           .med-delete
             a.modal-trigger(href="#modal1").i.material-icons delete_outline
-    #modal1.modal
-      .modal-content
-        h4 Delete Medication
-        p Are you sure you want to delete this medication?
-      .modal-footer
-        a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
-        form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/delete",method="POST") 
-          button(type='submit', data-id=appointment._id) Yes
+      #modal1.modal
+        .modal-content
+          h4 Delete Medication
+          p Are you sure you want to delete this medication?
+        .modal-footer
+          a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
+          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/delete",method="POST") 
+            button(type='submit', data-id=appointment._id) Yes
