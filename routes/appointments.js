@@ -39,7 +39,8 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
-  Medication.distinct(("name").where("adminCode").equals(user),  function(error, result){        
+  const medCode = req.medication.adminCode;
+  Medication.distinct("name", function(error, result){  
     result.sort();
     var medList = document.getElementById('medList');
     for(var i in result){
