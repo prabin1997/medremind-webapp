@@ -1,12 +1,15 @@
-extends layout
-
 block content
-  h1 Register
-  h3.a(href="/users/adminReg") Are you a admin? Click here to register
+  h1 Amdin Register
   form(method = 'POST', action='/users/register')
     #form-group
        label Name:
        input.form-control(name="name", type ='text')
+    #form-group
+       label Enter Admin Phone number:
+       input.form-control(name="adminNumber", type ='number')
+    #form-group
+       label Enter Patient Phone number:
+       input.form-control(name="number", type ='number')
     #form-group
        label Username:
        input.form-control(name="username", type ='text')
@@ -17,10 +20,7 @@ block content
        label Confirm:
        input.form-control(name="password2", type ='password')
     #form-group
-       label Create a 4 digit code (Provide this code to your Admin):
-       input.form-control(name="adminReq", type ='number')
+       label Enter the 4 digit admin Code (Only for admins):
+       input.form-control(name="adminCode", type ='number')
     br
     input.btn.btn-primary(type='submit', value='submit')
-  
-    
-    

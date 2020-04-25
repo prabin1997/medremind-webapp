@@ -11,9 +11,9 @@ block content
           .appointment-name Name: !{appointment.name}
           .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
           if user.isAdmin & appointment.confirm == true
-            .appointment-confirm Status: Taken
+            .appointment-time Status: Taken
           if user.isAdmin & appointment.confirm == false
-            .appointment-confirm Status: Not Taken
+            .appointment-time Status: Not Taken
           .appointment-arrow
             a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
         if user.isAdmin

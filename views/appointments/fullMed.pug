@@ -9,12 +9,12 @@ block content
         .appointment-details
           .appointment-name Name: !{appointment.name}
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-          .appointment-name Take Medication: !{appointment.mealTime}
+          .appointment-time Take Medication: !{appointment.mealTime}
           .appointment-note Note: !{appointment.note}
           if appointment.confirm == true
-            .appointment-name Status: Taken
+            .appointment-time Status: Taken
           else
-            .appointment-name Status: Not Taken
+            .appointment-time Status: Not Taken
     if appointment.confirm == false
         .appointment-confirm
             .confirm
