@@ -6,11 +6,11 @@ const Medication = require('../models/medication');
 const router = new express.Router();
 
 //register frorm
-router.get('/addMed', function(req, res){
+router.get('/medications/addMed', function(req, res){
     res.render('addMed');
 });
 
-router.post('/addMed', ensureAuthenticated, function(req, res, next) {
+router.post('/medications/addMed', ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
