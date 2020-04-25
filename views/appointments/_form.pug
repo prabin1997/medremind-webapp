@@ -1,8 +1,8 @@
 #form-group
   label(for='inputName') Medication name:
-  select#medList.selectDelta.form-control(name="name", required='', value=appointment.name)
-    each meds in med
-      option(selected=appointment.name == '', value='!{med}') Select a Med
+  select.selectDelta.form-control(name="name", required='', value=appointment.name)
+    for(var i=0; i < dropdownVals.length; i++)
+    option(selected=appointment.name == '', value='!{dropdownVals[i]}') Select a Med
 #form-group
   label(for='time') Medication date:
   input#inputDate.form-control(name="time", type ='text', placeholder='Pick a Date', required='', value=moment(appointment.time).format('MM-DD-YYYY hh:mma'))
@@ -22,3 +22,5 @@
 #form-group
   label(for='inputNote') Note:
   textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', value=appointment.note)
+
+  for(var i=0; i < dropdownVals.length; i++)
