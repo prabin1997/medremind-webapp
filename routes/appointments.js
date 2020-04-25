@@ -38,8 +38,8 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
-  const user = req.user.adminReq;
-  const medCode = req.medication.adminCode;
+  //const user = req.user.adminReq;
+  //const medCode = req.medication.adminCode;
   Medication.distinct("name", function(error, result){  
     result.sort();
     var medList = document.getElementById('medList');
