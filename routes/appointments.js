@@ -41,7 +41,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .select("name")
+  .select({ $project: {name: 1}, _id: 0})
   .exec()
   .then(function(result){
   res.render('appointments/create', { dropdownVals: result,
