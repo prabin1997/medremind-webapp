@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Register
-  h3.a(href="/users/adminReg") Are you a admin? Click here to register
+  a(href="/users/adminReg") Are you a admin? Click here to register
   form(method = 'POST', action='/users/register')
     #form-group
        label Name:

@@ -13,6 +13,11 @@ router.get('/register', function(req, res){
     res.render('register');
 });
 
+//Admin register frorm
+router.get('/adminReg', function(req, res){
+    res.render('adminReg');
+});
+
 //register process
 router.post('/register', function(req,res){
     const name = req.body.name;

@@ -12,6 +12,10 @@ router.get('/addMed', function(req, res){
                                    quantity: ''})});
 });
 
+router.get('/viewMed', function(req, res){
+    res.render('medications/viewMed');
+});
+
 router.post('/', ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const quantity = req.body.quantity;
@@ -28,6 +32,10 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
         res.redirect('medications/viewMed');
       });
   });
+
+  router.get('/viewMed', function(req, res){
+    res.render('medications/viewMed');
+});
 
 function ensureAuthenticated(req, res, next){
 if(req.isAuthenticated()){
