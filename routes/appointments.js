@@ -78,9 +78,14 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 // GET: /appointments/:id/edit
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const result = [];
+  Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
+  .distinct("name").exec(function(err, results) {
+          result = results;
+  });
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/edit', {appointment: appointment});
+      res.render('appointments/edit', {appointment: appointment, dropdownVals: result});
     });
 });
 
