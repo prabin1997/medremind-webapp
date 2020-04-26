@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  if user
+  if user.isAdmin
     .appointment.container.grey-text.text-darken-1
       h5.center Medications Diary
     each appointment in appointments
@@ -11,13 +11,12 @@ block content
           .appointment-details
             .appointment-name !{appointment.name}
             .appointment-time !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-            if user.isAdmin & appointment.confirm == true
+            if appointment.confirm == true
                 .appointment-time Status: Taken
-            if user.isAdmin & appointment.confirm == false
+            if appointment.confirm == false
                 .appointment-time Status: Not Taken
             .appointment-arrow
               a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
-          if user.isAdmin
             .med-edit
               a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
             .med-delete

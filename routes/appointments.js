@@ -113,7 +113,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
 // POST: /appointments/:id/delete
 router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-
   Appointment.remove({_id: id})
     .then(function() {
       res.redirect('/');

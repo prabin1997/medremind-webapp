@@ -18,9 +18,9 @@
 #form-group
   label(for='selectMeal') When to take the medication?
   select#selectDelta.form-control(name="mealTime", required='', value=appointment.mealTime)
-    option(selected=appointment.notification == '', value='') Select a medication meal time
-    option(selected=appointment.notification == 'Before Meal', value='Before Meal') Before Meal
-    option(selected=appointment.notification == 'After Meal', value='After Meal') After Meal
+    option(selected=appointment.mealTime == '', value='') Select a medication meal time
+    option(selected=appointment.mealTime == 'Before Meal', value='Before Meal') Before Meal
+    option(selected=appointment.mealTime == 'After Meal', value='After Meal') After Meal
 #form-group
   label(for='inputNote') Note:
   textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', value=appointment.note)
