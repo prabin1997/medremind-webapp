@@ -17,10 +17,10 @@ block content
                 .appointment-time Status: Not Taken
             .appointment-arrow
               a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
-            .med-edit
-              a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
-            .med-delete
-              a.modal-trigger(href="#modal1").i.material-icons delete_outline
+          .med-edit
+            a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
+          .med-delete
+            a.modal-trigger(href="#modal1").i.material-icons delete_outline
       #modal1.modal
         .modal-content
           h4 Delete Medication

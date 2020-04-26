@@ -28,6 +28,7 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     });
 });
 
+
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
@@ -83,6 +84,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
     });
 });
 
+
 // POST: /appointments/:id/edit
 router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
@@ -113,6 +115,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
 // POST: /appointments/:id/delete
 router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+
   Appointment.remove({_id: id})
     .then(function() {
       res.redirect('/');
@@ -124,8 +127,7 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/fullMed', {
-                                          appointment: appointment});
+      res.render('appointments/fullMed', {appointment: appointment});
     });
 });
 
