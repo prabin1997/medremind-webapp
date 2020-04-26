@@ -89,7 +89,9 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   Appointment.findOne({_id: id})
     .then(function(appointment) {
       res.render('appointments/edit', {appointment: appointment});
-    });
+    }).catch(function(error){
+      console.log(error);
+  });
 });
 
 // POST: /appointments/:id/edit

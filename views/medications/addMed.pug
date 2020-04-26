@@ -1,13 +1,16 @@
 extends ../layout
 
 block content
-  h1 Add Medication
-  form(method = 'POST', action='/medications')
-    #form-group
-       label Medication Name:
-       input.form-control(name="name", type ='text')
-    #form-group
-       label Pill Quantity (Optional):
-       input.form-control(name="quantity", type ='number')
-    br
-    input.btn.btn-primary(type='submit', value='submit')
+    if user.isAdmin
+        h1 Add Medication
+        form(method = 'POST', action='/medications')
+            #form-group
+            label Medication Name:
+            input.form-control(name="name", type ='text')
+            #form-group
+            label Pill Quantity (Optional):
+            input.form-control(name="quantity", type ='number')
+            br
+            input.btn.btn-primary(type='submit', value='submit')
+    else
+        h5.center Only admin can acess this page
