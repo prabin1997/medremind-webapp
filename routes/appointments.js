@@ -28,13 +28,6 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
-  const id = req.params.id;
-  Appointment.findOne({_id: id})
-    .then(function(appointment) {
-      res.render('appointments/edit', {appointment: appointment});
-    });
-});
 
 
 // GET: /appointments/create
@@ -89,9 +82,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   Appointment.findOne({_id: id})
     .then(function(appointment) {
       res.render('appointments/edit', {appointment: appointment});
-    }).catch(function(error){
-      console.log(error);
-  });
+    });
 });
 
 // POST: /appointments/:id/edit
