@@ -6,6 +6,7 @@ block content
       h5.center Medications Diary
     each appointment in appointments
       .card-panel.appointment.white.row
+        img(src='/img/med.png')
         .appointment-details
           .appointment-name !{appointment.name}
           .appointment-time !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}

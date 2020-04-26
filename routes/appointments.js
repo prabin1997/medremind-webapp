@@ -164,9 +164,10 @@ router.get('/appointments/diary', ensureAuthenticated, function(req, res) {
   const user = req.user.adminReq;
   const usera = req.user;
   Appointment.find().where('userAdmin').equals(user)
+  .select({"confirm": true})
    .then(function(appointments) {
      res.render('appointments/diary', {user: usera , appointments: appointments});
-  });
+   });
 });
 
 function ensureAuthenticated(req, res, next){
