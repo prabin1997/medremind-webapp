@@ -28,8 +28,6 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     });
 });
 
-
-
 // GET: /appointments/create
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
