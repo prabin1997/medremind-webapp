@@ -79,12 +79,11 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const user = req.user.adminReq;
-
+  Appointment.findOne({_id: id}, function(appointment){
+    // 2nd fetch 
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
   .distinct("name", function(dropresult){
-  // 2nd fetch 
-  Appointment.findOne({_id: id}, function(appointment){
-        res.render('appointments',
+        res.render('appointments/edit',
             {
               appointment: appointment,
               dropdownVals: dropresult
@@ -116,7 +115,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
 
       appointment.save()
         .then(function() {
-          req.flash('success', 'Medication Added');
+          req.flash('success', 'Medication Updated');
           res.redirect('/');
         });
     });
