@@ -79,18 +79,13 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const user = req.user.adminReq;
-  Appointment.findOne({_id: id}, function(appointment){
-    // 2nd fetch 
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .distinct("name", function(dropresult){
-        res.render('appointments/edit',
-            {
-              appointment: appointment,
-              dropdownVals: dropresult
-            }
-        );
+  .distinct("name").then(function(dropresult){
+  Appointment.findOne({_id: id})
+    .then(function(appointment) {
+      res.render('appointments/edit', {appointment: appointment, dropdownVals: dropresult});
     });
-  }); 
+  });
 });
 
 
@@ -115,7 +110,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
 
       appointment.save()
         .then(function() {
-          req.flash('success', 'Medication Updated');
+          req.flash('success', 'Medication Added');
           res.redirect('/');
         });
     });
