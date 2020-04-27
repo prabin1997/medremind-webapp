@@ -110,7 +110,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
 
       appointment.save()
         .then(function() {
-          req.flash('success', 'Medication Added');
+          req.flash('success', 'Medication Updated');
           res.redirect('/');
         });
     });
@@ -122,6 +122,7 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 
   Appointment.remove({_id: id})
     .then(function() {
+      req.flash('success', 'Medication Deleted');
       res.redirect('/');
     });
 });
@@ -165,6 +166,16 @@ router.get('/appointments/diary', ensureAuthenticated, function(req, res) {
      res.render('appointments/diary', {user: usera , appointments: appointments});
    });
 });
+
+router.post('/:id/diary/delete', ensureAuthenticated, function(req, res, next) {
+  const id = req.params.id;
+  Appointment.remove({_id: id})
+    .then(function() {
+      req.flash('success', 'Medication Deleted');
+      res.redirect('/');
+    });
+});
+
 
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
