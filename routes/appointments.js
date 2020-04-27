@@ -77,15 +77,11 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 
 // GET: /appointments/:id/edit
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
-  const user = req.user.adminReq;
   const id = req.params.id;
-  Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .distinct("name").exec(function(result){
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/edit', {appointment: appointment, dropdownVals: result});
+      res.render('appointments/edit', {appointment: appointment});
     });
-  });
 });
 
 
