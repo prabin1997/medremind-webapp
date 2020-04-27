@@ -77,6 +77,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 
 // GET: /appointments/:id/edit
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
+  const user = req.user.adminReq;
   const id = req.params.id;
   const result = [];
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
