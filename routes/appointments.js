@@ -78,12 +78,30 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 // GET: /appointments/:id/edit
 router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const user = req.user.adminReq;
+  Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
+  .distinct("name", function(dropresult){
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/edit', {appointment: appointment});
+      res.render('appointments/edit', {appointment: appointment, dropdownVals: dropresult});
     });
+  });
 });
 
+ // 1st fetch symbol
+ users.distinct('symbol',{limit: 10000},function(e, syms){
+  // 2nd fetch [users]
+  users.find(query,{limit: 10000},function(e, docs){
+      res.render('users',
+          {
+              usersSym: syms,
+              users: docs
+          }
+      );
+  });
+});
+// P.S. do not forget to check on error on each callback
+ 
 
 // POST: /appointments/:id/edit
 router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
