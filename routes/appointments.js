@@ -52,7 +52,6 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   const timeZone = req.body.timeZone;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
   const createdUser = req.user._id;
-  const medId = req.medication._id;
   const userAdmin = req.user.adminReq;
   const adminNumber = req.user.adminNumber;
   const patientNumber = req.user.number;
@@ -65,7 +64,6 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
                                        timeZone: timeZone,
                                        time: time,
                                        createdUser: createdUser,
-                                       medId: medId,
                                        adminNumber: adminNumber,
                                        patientNumber: patientNumber,
                                        userAdmin: userAdmin,
@@ -140,6 +138,8 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const medName = req.params.name
+  const user = req.user.adminReq;
   const msg = ["Diabetes is not terrible and there are many things you can do to prevent problems from diabetes, such as monitoring blood glucose, watching your diet, keeping fit, and taking pills regularly.",
   "Try brisk walking – a convenient, safe and cost-effective way of exercising! It’s good for your heart and will help control blood glucose.",
   "Taking diabetes medications or injecting insulin regularly can help control your blood glucose level.",
@@ -150,12 +150,16 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   const successMsg = "Message of the day: ";
+  
+  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
+  .update({$inc: { quantity: -1}}).then(function(){
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
     .then(function() {
       req.flash('success', "Sucessfully confirmed medication");
       req.flash('success', successMsg + randomMsg);
       res.redirect('/');
     });
+  });
 });
 
 // patient diary page

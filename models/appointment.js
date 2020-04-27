@@ -12,7 +12,6 @@ const AppointmentSchema = new mongoose.Schema({
   timeZone: {type: String, default: 'GMT'},
   time: {type: Date, index: true},
   createdUser: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  medId: { type: mongoose.Schema.ObjectId, ref: 'Medication' },
   adminNumber: {type: String, ref: 'adminNumber'},
   patientNumber: {type: String, ref: 'number'},
   userAdmin: {type: String, ref: 'adminReq'},
