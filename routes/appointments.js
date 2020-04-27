@@ -52,6 +52,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   const timeZone = req.body.timeZone;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
   const createdUser = req.user._id;
+  const medId = req.medication._id;
   const userAdmin = req.user.adminReq;
   const adminNumber = req.user.adminNumber;
   const patientNumber = req.user.number;
@@ -64,6 +65,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
                                        timeZone: timeZone,
                                        time: time,
                                        createdUser: createdUser,
+                                       medId: medId,
                                        adminNumber: adminNumber,
                                        patientNumber: patientNumber,
                                        userAdmin: userAdmin,
