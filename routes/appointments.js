@@ -81,7 +81,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const result = [];
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .distinct("name").exec(function(err, results) {
+  .distinct("name").exec(function(results) {
           result = results;
   });
   Appointment.findOne({_id: id})
