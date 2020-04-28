@@ -134,21 +134,16 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  //const medName = req.params.name;
-  //const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
-  //Medication.find().where('adminCode').equals(user)
-  //.where('name').equals(medName)
-  //.then(function(medications) {
       res.render('appointments/fullMed', {appointment: appointment});
     });
-  //});
 });
 
-router.post('/:id/:name/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
+router.post('/:id/:name/quantity/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const medName = req.params.name;
+  const quantity = req.params.quantity;
   const user = req.user.adminReq;
   const msg = ["Diabetes is not terrible and there are many things you can do to prevent problems from diabetes, such as monitoring blood glucose, watching your diet, keeping fit, and taking pills regularly.",
   "Try brisk walking – a convenient, safe and cost-effective way of exercising! It’s good for your heart and will help control blood glucose.",
@@ -162,7 +157,7 @@ router.post('/:id/:name/fullMed/confirm', ensureAuthenticated, function(req, res
   const successMsg = "Message of the day: ";
 
   Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
-  .update({ "$inc": { "quantity": -1 }}).then(function(){
+  .update({ "$inc": { "quantity": -quantity }}).then(function(){
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
       req.flash('success', "Sucessfully confirmed medication");
