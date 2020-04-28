@@ -12,7 +12,7 @@ block content
             .appointment-name !{appointment.name}
             .appointment-time !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
           each med in meds
-            .appointment-time Quantity: #{meds.quantity}
+            .appointment-time Quantity: #{med.quantity}
             if appointment.confirm == true
                 .appointment-time Status: Taken
             if appointment.confirm == false
