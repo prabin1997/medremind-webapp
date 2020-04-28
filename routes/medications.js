@@ -20,7 +20,6 @@ router.post('/', middleware ,ensureAuthenticated, function(req, res, next) {
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
     const adminNumber = req.user.adminNumber;
-    const image = req.imageName;
     const adminCode = req.user.adminReq;
 
   
