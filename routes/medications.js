@@ -44,7 +44,7 @@ router.post('/:id/viewMed/delete', ensureAuthenticated, function(req, res, next)
     Medication.remove({_id: id})
       .then(function() {
         req.flash('success', 'Medication Deleted');
-        res.redirect('medications/viewMed');
+        res.redirect('/');
       });
   });
 
