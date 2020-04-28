@@ -11,8 +11,6 @@ block content
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
           .appointment-time Take Medication: !{appointment.mealTime}
           .appointment-note Note: !{appointment.note}
-          each i in quantity
-            li #{quantity}
           if appointment.confirm == true
             .appointment-time Status: Taken
           else
