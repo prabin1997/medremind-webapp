@@ -130,7 +130,7 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const medName = JSON.parse(req.params)['name']
+  const medName = req.param('name');
   const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
