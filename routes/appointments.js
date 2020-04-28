@@ -80,7 +80,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const user = req.user.adminReq;
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .then(function(dropresult){
+  .distinct("name").then(function(dropresult){
   Appointment.findOne({_id: id})
     .then(function(appointment) {
       res.render('appointments/edit', {appointment: appointment, dropdownVals: dropresult});
@@ -130,10 +130,15 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const medName = req.params.name;
+  const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
-      res.render('appointments/fullMed', {appointment: appointment, quantity: arrayResult});
+  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
+  .then(function(medication) {
+      res.render('appointments/fullMed', {appointment: appointment, medication: medication});
     });
+  });
 });
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
@@ -148,6 +153,7 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   const successMsg = "Message of the day: ";
+
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
       req.flash('success', "Sucessfully confirmed medication");
