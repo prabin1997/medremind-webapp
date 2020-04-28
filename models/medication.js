@@ -11,6 +11,10 @@ const MedicationSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    image: { 
+        data: Buffer, 
+        contentType : String 
+    },
     quantity:{
         type: Number,
         required:false
