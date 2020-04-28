@@ -16,7 +16,7 @@ block content
             if appointment.confirm == false
                 .appointment-time Status: Not Taken
             .appointment-arrow
-              a(href="/appointments/" + appointment.id + /appointment.name + "/fullMed").i.material-icons arrow_forward
+              a(href="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed").i.material-icons arrow_forward
           .med-edit
             a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
           .med-delete
