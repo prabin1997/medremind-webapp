@@ -16,20 +16,16 @@ const router = new express.Router();
 // GET: /appointments
 router.get('/', checkAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
-    const medName = req.params.name;
     const isadmin = req.user.isAdmin;
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
-      Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
-      .then(function(arrayResult){
        if(isadmin == true){
-       res.render('appointments/index', {user: usera , appointments: appointments, meds: arrayResult});
+       res.render('appointments/index', {user: usera , appointments: appointments});
        } else if(isadmin == false){
-       res.render('appointments/pindex', {user: usera , appointments: appointments, meds: arrayResult});
+       res.render('appointments/pindex', {user: usera , appointments: appointments});
        }
     });
-  });
 });
 
 
@@ -84,7 +80,7 @@ router.get('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const user = req.user.adminReq;
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .distinct("name").then(function(dropresult){
+  .then(function(dropresult){
   Appointment.findOne({_id: id})
     .then(function(appointment) {
       res.render('appointments/edit', {appointment: appointment, dropdownVals: dropresult});
@@ -152,15 +148,12 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   const successMsg = "Message of the day: ";
-
-  Medication.update({"$inc": { "quantity": -1}}).then(function() {
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
       req.flash('success', "Sucessfully confirmed medication");
       req.flash('success', successMsg + randomMsg);
       res.redirect('/');
     });
-  });
 });
 
 // patient diary page
