@@ -51,6 +51,9 @@ router.post('/register', function(req,res){
             bcrypt.hash(newUser.password, salt, function(err, hash){
                 if(User.find({adminReq: {$ne: adminReq}})){
                         newUser.isAdmin = false;  
+                }else{
+                    req.flash('error', 'Wrong details. Please Try again');
+                    res.redirect('/users/login');
                 }
                 newUser.password = hash;
                 newUser.save(function(err){
@@ -106,6 +109,9 @@ router.post('/adminReg', function(req,res){
                 if(User.find({adminReq: {$eq: adminCode}})){
                         newUser.adminReq = adminCode;
                         newUser.isAdmin = true;  
+                }else{
+                    req.flash('error', 'Wrong details. Please Try again');
+                    res.redirect('/users/login');
                 }
                 newUser.password = hash;
                 newUser.save(function(err){

@@ -15,12 +15,15 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
+    const adminNumber = req.user.adminNumber;
+
     const adminCode = req.user.adminReq;
 
   
     const medication = new Medication({name: name,
                                          quantity: quantity,
                                          adminCode: adminCode,
+                                         adminNumber: adminNumber,
                                          createdUser: createdUser});
     medication.save()
       .then(function() {
