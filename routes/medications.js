@@ -2,7 +2,6 @@
 
 const express = require('express');
 const Medication = require('../models/medication');
-const Appointment = require('../models/appointment');
 const router = new express.Router();
 
 //register frorm
@@ -42,9 +41,10 @@ router.get('/viewMed', ensureAuthenticated, function(req, res) {
 // POST: /appointments/:id/delete
 router.post('/:id/viewMed/delete', ensureAuthenticated, function(req, res, next) {
     const id = req.params.id;
-    Appointment.remove({_id: id})
+    Medication.remove({_id: id})
       .then(function() {
-        res.redirect('/');
+        req.flash('success', 'Medication Deleted');
+        res.redirect('medications/viewMed');
       });
   });
 

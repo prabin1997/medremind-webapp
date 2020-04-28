@@ -122,7 +122,7 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 
   Appointment.remove({_id: id})
     .then(function() {
-      req.flash('success', 'Medication Deleted');
+      req.flash('success', 'Reminder Deleted');
       res.redirect('/');
     });
 });
