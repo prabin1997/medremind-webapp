@@ -28,7 +28,7 @@ block content
           p Do you confirm you have taken this medication?
         .modal-footer
           a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
-          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/fullMed" +"/confirm" ,method="POST") 
+          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed" +"/confirm" ,method="POST") 
             button(type='submit', data-id=appointment._id) Yes
 
  
