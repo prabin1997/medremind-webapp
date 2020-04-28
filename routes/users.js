@@ -55,7 +55,6 @@ router.post('/register', function(req,res){
         bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password, salt, function(err, hash){
                 if(User.find({adminReq: {$ne: adminReq}})){
-                   newUser.adminReq = adminReq;
                    newUser.isAdmin = false;                
                 }
                 else if(User.find({adminReq: {$eq: adminCode}})){
