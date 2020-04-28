@@ -130,10 +130,12 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const medName = req.params.name;
   const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
   Medication.find().where('adminCode').equals(user)
+  .where('name').equals(medName)
   .then(function(medications) {
       res.render('appointments/fullMed', {appointment: appointment, medications: medications});
     });
