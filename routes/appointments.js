@@ -133,11 +133,11 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const medName = req.params.name;
   const user = req.user.adminReq;
 
-  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}, { quantity: { $exists: true }}]})
-  .distinct("quantity").then(function(quantity){
   Appointment.findOne({_id: id})
-    .then(function(appointment) {
-      res.render('appointments/fullMed', {appointment: appointment, quantity: quantity});
+  .then(function(appointment) {
+  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}, { quantity: { $exists: true }}]})
+  .distinct("quantity").then(function(arrayResult){
+      res.render('appointments/fullMed', {appointment: appointment, quantity: arrayResult});
     });
   });
 });
