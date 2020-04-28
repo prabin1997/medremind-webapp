@@ -33,7 +33,6 @@ router.get('/', checkAuthenticated, function(req, res, next) {
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
-  .distinct("name")
   .then(function(result){
   res.render('appointments/create', { dropdownVals: result,
     appointment: new Appointment({name: '',
