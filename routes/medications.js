@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express');
-const User = require('../models/user');
 const Medication = require('../models/medication');
+const Appointment = require('../models/appointment');
 const router = new express.Router();
 
 //register frorm
