@@ -22,5 +22,8 @@
     option(selected=appointment.mealTime == 'Before Meal', value='Before Meal') Before Meal
     option(selected=appointment.mealTime == 'After Meal', value='After Meal') After Meal
 #form-group
-  label(for='inputNote') Note:
+  label(for='inputQuantity') Quantity:
+  textarea#inputQuantity.form-control(name="quantity", type ='number', placeholder='Quantity', value=appointment.quantity)
+#form-group
+  label(for='inputNote') Note (Optional):
   textarea#inputNote.form-control(name="note", type ='text', placeholder='Note', value=appointment.note)

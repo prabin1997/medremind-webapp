@@ -55,6 +55,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   const userAdmin = req.user.adminReq;
   const adminNumber = req.user.adminNumber;
   const patientNumber = req.user.number;
+  const quantity = req.body.quantity;
   const note = req.body.note;
   const confirm = req.body.confirm;
 
@@ -67,6 +68,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
                                        adminNumber: adminNumber,
                                        patientNumber: patientNumber,
                                        userAdmin: userAdmin,
+                                       quantity: quantity,
                                        note: note,
                                        confirm: confirm});
   appointment.save()
@@ -96,6 +98,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
+  const quantity = req.body.quantity;
   const note = req.body.note;
 
 
@@ -105,6 +108,7 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
       appointment.notification = notification;
       appointment.mealTime = mealTime;
       appointment.time = time;
+      appointment.quantity = quantity;
       appointment.note = note;
 
 
@@ -184,7 +188,7 @@ router.post('/:id/diary/delete', ensureAuthenticated, function(req, res, next) {
   Appointment.remove({_id: id})
     .then(function() {
       req.flash('success', 'Medication Deleted');
-      res.redirect('/');
+      res.redirect('/appointments/diary');
     });
 });
 
