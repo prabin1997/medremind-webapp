@@ -33,6 +33,7 @@ router.get('/', checkAuthenticated, function(req, res, next) {
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
   Medication.find({ $and: [{ name: { $exists: true }},{ adminCode: { $eq: user }}]})
+  .distinct("name")
   .then(function(result){
   res.render('appointments/create', { dropdownVals: result,
     appointment: new Appointment({name: '',
@@ -129,16 +130,20 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
+  const medName = req.params.name;
+  const user = req.user.adminReq;
+
+  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}, { quantity: { $exists: true }}]})
+  .distinct("quantity").then(function(quantity){
   Appointment.findOne({_id: id})
     .then(function(appointment) {
-      res.render('appointments/fullMed', {appointment: appointment});
+      res.render('appointments/fullMed', {appointment: appointment, quantity: quantity});
     });
+  });
 });
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const medName = req.params.name;
-  const user = req.user.adminReq;
   const msg = ["Diabetes is not terrible and there are many things you can do to prevent problems from diabetes, such as monitoring blood glucose, watching your diet, keeping fit, and taking pills regularly.",
   "Try brisk walking – a convenient, safe and cost-effective way of exercising! It’s good for your heart and will help control blood glucose.",
   "Taking diabetes medications or injecting insulin regularly can help control your blood glucose level.",
@@ -149,11 +154,10 @@ router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next
   ];
   const randomMsg = msg[Math.floor(Math.random() * msg.length)];
   const successMsg = "Message of the day: ";
-  
+
+  Medication.update({"$inc": { "quantity": -1}}).then(function() {
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
-  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}, { quantity: { $exists: true }}]})
-  .update({"$inc": { "quantity": -1}}).then(function() {
       req.flash('success', "Sucessfully confirmed medication");
       req.flash('success', successMsg + randomMsg);
       res.redirect('/');
