@@ -157,7 +157,7 @@ router.post('/:id/:name/quantity/fullMed/confirm', ensureAuthenticated, function
   const successMsg = "Message of the day: ";
 
   Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
-  .update({ "$inc": { "quantity": -quantity }}).then(function(){
+  .update({ "$inc": { "quantity": - quantity}}).then(function(){
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
       req.flash('success', "Sucessfully confirmed medication");
