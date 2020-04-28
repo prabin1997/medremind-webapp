@@ -4,7 +4,6 @@ block content
   if user
     .appointment.container.grey-text.text-darken-1
       h5.center !{appointment.name}
-    each i in quantity
       .card-panel.appointmentFull.white.row
         img(src='/img/med.png')
         .appointment-details
@@ -12,7 +11,8 @@ block content
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
           .appointment-time Take Medication: !{appointment.mealTime}
           .appointment-note Note: !{appointment.note}
-          .appointment-note Current quantity: #{i}
+          each i in quantity
+            li #{quantity}
           if appointment.confirm == true
             .appointment-time Status: Taken
           else
