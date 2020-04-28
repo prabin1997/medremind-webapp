@@ -14,9 +14,9 @@ router.get('/addMed', function(req, res){
                                    quantity: ''})});
 });
 
-router.post('/', middleware ,ensureAuthenticated, function(req, res, next) {
+router.post('/', upload.single('image') , ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
-    const image = req.imageName;
+    const image = req.file.buffer;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
     const adminNumber = req.user.adminNumber;
@@ -54,41 +54,33 @@ router.post('/:id/viewMed/delete', ensureAuthenticated, function(req, res, next)
         res.redirect('/');
       });
   });
+
 // uploading img to mongodb middleware
-function middleware(req, res, next) {
-
-    var imageName;
-
-    const uploadStorage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, './uploads');
-        },
-        filename: function (req, file, cb) {
-            imageName = Date.now()+file.originalname;
-            //imageName += "_randomstring"
-            cb(null, imageName);
-        }
-    });
-
-    const fileFilter = (req, file, cb) => {
-        // reject a file
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-          cb(null, true);
-        } else {
-          cb(null, false);
-        }
-      };
-
-    const upload = multer({storage: uploadStorage, fileFilter: fileFilter});
-
-    const uploadFile = upload.single('image');
-
-    uploadFile(req, res, function (err) {
-        req.imageName = imageName;
-        req.uploadError = err;
-        next();
-    });
-};
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+      cb(null, new Date().toISOString() + file.originalname);
+    }
+  });
+  
+  const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+  
+  const upload = multer({
+    storage: storage,
+    limits: {
+      fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+  });
 
 function ensureAuthenticated(req, res, next){
 if(req.isAuthenticated()){
