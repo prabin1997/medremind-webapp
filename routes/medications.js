@@ -57,7 +57,7 @@ router.post('/:id/viewMed/delete', ensureAuthenticated, function(req, res, next)
 // uploading img to mongodb middleware
 function middleware(req, res, next) {
 
-    const imageName;
+    var imageName;
 
     const uploadStorage = multer.diskStorage({
         destination: function (req, file, cb) {
