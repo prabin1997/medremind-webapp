@@ -27,6 +27,8 @@ router.post('/register', function(req,res){
     const password = req.body.password;
     const password2 = req.body.password2;
     const adminReq = req.body.adminReq;
+    const adminCode = req.body.adminCode;
+
 
     req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('username', 'Username is required').notEmpty();
@@ -52,12 +54,12 @@ router.post('/register', function(req,res){
 
         bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password, salt, function(err, hash){
-                if(User.find({adminReq: {$ne: req.body.adminCode}})){
-                   newUser.adminReq = req.body.adminReq;
+                if(User.find({adminReq: {$ne: adminReq}})){
+                   newUser.adminReq = adminReq;
                    newUser.isAdmin = false;                
                 }
-                else if(User.find({adminReq: {$eq: req.body.adminCode}})){
-                        newUser.adminReq = req.body.adminCode;
+                else if(User.find({adminReq: {$eq: adminCode}})){
+                        newUser.adminReq = adminCode;
                         newUser.isAdmin = true;  
                 }
                 newUser.password = hash;
