@@ -20,12 +20,15 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
+      Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
+      .then(function(arrayResult){
        if(isadmin == true){
-       res.render('appointments/index', {user: usera , appointments: appointments});
+       res.render('appointments/index', {user: usera , appointments: appointments, meds: arrayResult});
        } else if(isadmin == false){
-       res.render('appointments/pindex', {user: usera , appointments: appointments});
+       res.render('appointments/pindex', {user: usera , appointments: appointments, meds: arrayResult});
        }
     });
+  });
 });
 
 
@@ -134,11 +137,8 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
-  Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}, { quantity: { $exists: true }}]})
-  .then(function(arrayResult){
       res.render('appointments/fullMed', {appointment: appointment, quantity: arrayResult});
     });
-  });
 });
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
