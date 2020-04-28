@@ -138,7 +138,7 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
 
 router.post('/:id/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const medName = req.appointment.name;
+  const medName = req.params.name;
   const user = req.user.adminReq;
   const msg = ["Diabetes is not terrible and there are many things you can do to prevent problems from diabetes, such as monitoring blood glucose, watching your diet, keeping fit, and taking pills regularly.",
   "Try brisk walking – a convenient, safe and cost-effective way of exercising! It’s good for your heart and will help control blood glucose.",
