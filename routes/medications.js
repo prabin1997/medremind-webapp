@@ -79,7 +79,7 @@ function middleware(req, res, next) {
         }
       };
 
-    const uploader = multer({storage: uploadStorage, fileFilter: fileFilter});
+    const upload = multer({storage: uploadStorage, fileFilter: fileFilter});
 
     const uploadFile = upload.single('image');
 
