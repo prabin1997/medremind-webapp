@@ -15,6 +15,7 @@ const medications = require('./routes/medications');
 const scheduler = require('./schedulers/scheduler');
 const reminder = require('./schedulers/reminder');
 const adminReminder = require('./schedulers/adminReminder');
+const refillReminder = require('./schedulers/refillReminder');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -164,10 +165,9 @@ app.use(function(err, req, res, next) {
 });
 
 scheduler.start();
-
 reminder.start();
-
 adminReminder.start();
+refillReminder.start();
 
 
 module.exports = app;
