@@ -3,7 +3,7 @@ extends ../layout
 block content
     if user.isAdmin
         h1 Add Medication
-        form(method = 'POST', action='/medications')
+        form(method = 'POST', action='/medications', enctype='multipart/form-data')
             #form-group
             label Medication Name:
             input.form-control(name="name", type ='text')
