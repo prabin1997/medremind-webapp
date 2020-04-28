@@ -16,6 +16,7 @@ const router = new express.Router();
 // GET: /appointments
 router.get('/', checkAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
+    const medName = req.params.name;
     const isadmin = req.user.isAdmin;
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
@@ -133,8 +134,6 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const medName = req.params.name;
-  const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
       res.render('appointments/fullMed', {appointment: appointment, quantity: arrayResult});
