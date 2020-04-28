@@ -135,8 +135,8 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   Appointment.findOne({_id: id})
   .then(function(appointment) {
   Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
-  .then(function(medication) {
-      res.render('appointments/fullMed', {appointment: appointment, medication: medication});
+  .then(function(medications) {
+      res.render('appointments/fullMed', {appointment: appointment, medications: medications});
     });
   });
 });
