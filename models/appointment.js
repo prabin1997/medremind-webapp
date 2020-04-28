@@ -15,7 +15,6 @@ const AppointmentSchema = new mongoose.Schema({
   adminNumber: {type: String, ref: 'adminNumber'},
   patientNumber: {type: String, ref: 'number'},
   userAdmin: {type: String, ref: 'adminReq'},
-  quantity: Number,
   note: String,
   confirm: {type: Boolean, default: false}
 });

@@ -55,7 +55,6 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
   const userAdmin = req.user.adminReq;
   const adminNumber = req.user.adminNumber;
   const patientNumber = req.user.number;
-  const quantity = req.body.quantity;
   const note = req.body.note;
   const confirm = req.body.confirm;
 
@@ -68,7 +67,6 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
                                        adminNumber: adminNumber,
                                        patientNumber: patientNumber,
                                        userAdmin: userAdmin,
-                                       quantity: quantity,
                                        note: note,
                                        confirm: confirm});
   appointment.save()
@@ -98,7 +96,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
   const notification = req.body.notification;
   const mealTime = req.body.mealTime;
   const time = moment(req.body.time, 'MM-DD-YYYY hh:mma');
-  const quantity = req.body.quantity;
   const note = req.body.note;
 
 
@@ -108,7 +105,6 @@ router.post('/:id/edit', ensureAuthenticated, function(req, res, next) {
       appointment.notification = notification;
       appointment.mealTime = mealTime;
       appointment.time = time;
-      appointment.quantity = quantity;
       appointment.note = note;
 
 
@@ -140,7 +136,7 @@ router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
     });
 });
 
-router.post('/:id/:name/quantity/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
+router.post('/:id/:name/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
   const medName = req.params.name;
   const user = req.user.adminReq;
@@ -156,7 +152,7 @@ router.post('/:id/:name/quantity/fullMed/confirm', ensureAuthenticated, function
   const successMsg = "Message of the day: ";
 
   Medication.find({ $and: [{ name: { $eq: medName }},{ adminCode: { $eq: user }}]})
-  .update({ "$inc": { "quantity": -appointment.quantity}}).then(function(){
+  .update({ "$inc": { "quantity": -1}}).then(function(){
   Appointment.update({_id: id}, {"$set":{"confirm": true}})
   .then(function() {
       req.flash('success', "Sucessfully confirmed medication");

@@ -10,7 +10,6 @@ block content
           .appointment-name Name: !{appointment.name}
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
           .appointment-time Take Medication: !{appointment.mealTime}
-          .appointment-time Quantity: !{appointment.quantity}
           .appointment-note Note: !{appointment.note}
           if appointment.confirm == true
             .appointment-time Status: Taken
@@ -27,7 +26,7 @@ block content
           p Do you confirm you have taken this medication?
         .modal-footer
           a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href='#!') Cancel
-          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/" + appointment.name + "/" + appointment.quantity + "/fullMed" +"/confirm" ,method="POST") 
+          form.modal-action.waves-effect.waves-green.btn-flat(action="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed" +"/confirm" ,method="POST") 
             button(type='submit', data-id=appointment._id) Yes
 
  
