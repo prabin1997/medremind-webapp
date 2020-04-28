@@ -18,8 +18,57 @@ router.get('/adminReg', function(req, res){
     res.render('adminReg');
 });
 
-//register process
+// patient register process
 router.post('/register', function(req,res){
+    const name = req.body.name;
+    const username = req.body.username;
+    const password = req.body.password;
+    const password2 = req.body.password2;
+    const adminReq = req.body.adminReq;
+
+
+    req.checkBody('name', 'Name is required').notEmpty();
+    req.checkBody('username', 'Username is required').notEmpty();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+    let errors = req.validationErrors();
+    
+    if(errors){
+        res.render('register', {
+            errors:errors  
+        });
+    } else {
+        let newUser = new User({
+            name:name,
+            username:username,
+            password:password,
+            adminReq:adminReq
+        });
+
+
+        bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(newUser.password, salt, function(err, hash){
+                if(User.find({adminReq: {$ne: adminReq}})){
+                        newUser.isAdmin = false;  
+                }
+                newUser.password = hash;
+                newUser.save(function(err){
+                    if(err){
+                        console.log(err);
+                        return;   
+                    } else {
+                        req.flash('success', 'You are now registered and can log in');
+                        res.redirect('/users/login');
+                    }
+                });
+            });
+        });
+    } 
+});
+
+// admin register process
+router.post('/adminReg', function(req,res){
     const name = req.body.name;
     const number = req.body.number;
     const adminNumber = req.body.adminNumber;
@@ -38,7 +87,7 @@ router.post('/register', function(req,res){
     let errors = req.validationErrors();
     
     if(errors){
-        res.render('register', {
+        res.render('adminReg', {
             errors:errors  
         });
     } else {
@@ -57,10 +106,6 @@ router.post('/register', function(req,res){
                 if(User.find({adminReq: {$eq: adminCode}})){
                         newUser.adminReq = adminCode;
                         newUser.isAdmin = true;  
-                }else{
-                     newUser.adminReq = adminReq;
-                     newUser.isAdmin = false;    
-
                 }
                 newUser.password = hash;
                 newUser.save(function(err){
