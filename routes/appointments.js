@@ -18,12 +18,13 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     const user = req.user.adminReq;
     const isadmin = req.user.isAdmin;
     const usera = req.user;
+    const appointmenta = req.appointment;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
        if(isadmin == true){
-       res.render('appointments/index', {user: usera , appointments: appointments});
+       res.render('appointments/index', {user: usera , appointment: appointmenta, appointments: appointments});
        } else if(isadmin == false){
-       res.render('appointments/pindex', {user: usera , appointments: appointments});
+       res.render('appointments/pindex', {user: usera , appointment: appointmenta, appointments: appointments});
        }
     });
 });
@@ -130,7 +131,7 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const medName = req.params.name;
+  const medName = req.appointment.name;
   const user = req.user.adminReq;
   Appointment.findOne({_id: id})
   .then(function(appointment) {
