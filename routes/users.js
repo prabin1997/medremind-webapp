@@ -58,7 +58,9 @@ router.post('/register', function(req,res){
                         newUser.adminReq = adminCode;
                         newUser.isAdmin = true;  
                 }else{
-                     newUser.isAdmin = false;                
+                     newUser.adminReq = adminReq;
+                     newUser.isAdmin = false;    
+
                 }
                 newUser.password = hash;
                 newUser.save(function(err){
