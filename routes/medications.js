@@ -4,6 +4,7 @@ const express = require('express');
 const Medication = require('../models/medication');
 const router = new express.Router();
 const multer = require('multer');
+const path = require('path');
 
 // uploading img to mongodb middleware
 const storage = multer.diskStorage({
