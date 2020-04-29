@@ -39,7 +39,6 @@ router.get('/addMed', function(req, res){
 
 router.post('/', upload , ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
-    const image = req.file.filename;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
     const adminNumber = req.user.adminNumber;
@@ -47,6 +46,7 @@ router.post('/', upload , ensureAuthenticated, function(req, res, next) {
 
         if (req.file.filename !== undefined) {
         // process image here
+        const image = req.file.filename;
         const medication = new Medication({name: name,
             image: image,
             quantity: quantity,
