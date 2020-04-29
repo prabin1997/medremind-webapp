@@ -2,13 +2,16 @@ extends ../layout
 
 block content
     .appointment.container.grey-text.text-darken-1
-        h5.center Medications
+        h5.center My reminders
     each appointment in appointments
         if appointment.confirm == false
             .card-panel.appointment.white.row
-                img(src='/img/med.png')
                 .appointment-details
                     .appointment-name Name: !{appointment.name}
                     .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+                    if appointment.confirm == true
+                        .appointment-time Status: Taken
+                    if appointment.confirm == false
+                        .appointment-time Status: Not Taken
                     .appointment-arrow
-                        a(href="/appointments/" + appointment.id + "/fullMed").i.material-icons arrow_forward
+                        a(href="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed").i.material-icons arrow_forward

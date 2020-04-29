@@ -5,7 +5,10 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center !{appointment.name}
       .card-panel.appointmentFull.white.row
-        img(src='/img/med.png')
+        if medImage
+            img(src='/uploads/'+medImage) 
+        else
+            img(src='/img/med.png')
         .appointment-details
           .appointment-name Name: !{appointment.name}
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
