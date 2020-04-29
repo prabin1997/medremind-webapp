@@ -129,16 +129,10 @@ router.post('/:id/delete', ensureAuthenticated, function(req, res, next) {
 // full med details page 
 router.get('/:id/name/fullMed', ensureAuthenticated, function(req, res, next) {
   const id = req.params.id;
-  const name = req.params.name;
-  const user = req.user.adminReq;
-
-  Medication.find({ $and: [{ name: { $eq: name }},{ adminCode: { $eq: user }}]})
-  .distinct("image").then(function(medImage){
   Appointment.findOne({_id: id})
   .then(function(appointment) {
-      res.render('appointments/fullMed', {appointment: appointment, medImage: medImage});
+      res.render('appointments/fullMed', {appointment: appointment});
     });
-  });
 });
 
 router.post('/:id/:name/fullMed/confirm', ensureAuthenticated, function(req, res, next) {
