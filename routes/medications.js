@@ -39,7 +39,7 @@ router.get('/addMed', function(req, res){
 
 router.post('/', upload.single('image') , ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
-    const image = req.file;
+    const image = req.file.filename;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
     const adminNumber = req.user.adminNumber;
