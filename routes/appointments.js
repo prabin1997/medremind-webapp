@@ -5,7 +5,6 @@ const express = require('express');
 const moment = require('moment');
 const Appointment = require('../models/appointment');
 const Medication = require('../models/medication');
-const User = require('../models/user');
 const router = new express.Router();
 
 
