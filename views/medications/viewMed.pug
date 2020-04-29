@@ -6,7 +6,7 @@ block content
     each medication in medications
         .card-panel.medication.white.row
             if medication.image
-                img.imageSrc1(src="./uploads/+!{medication.image}") 
+                img.imageSrc1(src="./uploads/"+medication.image) 
             else
                 img(src='/img/med.png')
             .medication-details
