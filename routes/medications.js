@@ -6,9 +6,10 @@ const router = new express.Router();
 const multer = require('multer');
 const path = require('path');
 
+
 // uploading img to mongodb middleware
 const storage = multer.diskStorage({
-    destination: "./public/uploads/",
+    destination: "/public/uploads/",
     filename: function(req, file, cb) {
       cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname));
     }
