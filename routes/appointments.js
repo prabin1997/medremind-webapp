@@ -19,15 +19,12 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
-      Medication.find().where('adminCode').equals(user)
-      .then(function(medications){
        if(isadmin == true){
-       res.render('appointments/index', {user: usera , appointments: appointments, medications: medications});
+       res.render('appointments/index', {user: usera , appointments: appointments});
        } else if(isadmin == false){
-       res.render('appointments/pindex', {user: usera , appointments: appointments, medications: medications});
+       res.render('appointments/pindex', {user: usera , appointments: appointments});
        }
     });
-  });
 });
 
 
