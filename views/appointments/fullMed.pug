@@ -5,7 +5,11 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center !{appointment.name}
       .card-panel.appointmentFull.white.row
-        img(src='/img/med.png')
+        each medication in medications
+          if medication.image
+            img(src='/uploads/'+medication.image) 
+          else
+            img(src='/img/med.png')
         .appointment-details
           .appointment-name Name: !{appointment.name}
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
@@ -19,6 +23,7 @@ block content
         .appointment-confirm
             .confirm
                 button.a.modal-trigger(href="#modal2") Confirm 
+
     #modal2.modal
         .modal-content
           h4 Confirm Medication
