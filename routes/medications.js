@@ -7,8 +7,9 @@ const multer = require('multer');
 
 // uploading img to mongodb middleware
 const storage = multer.diskStorage({
+    destination: "./public/uploads/",
     filename: function(req, file, cb) {
-      cb(null, new Date().toISOString() + file.originalname);
+      cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname));
     }
   });
   
@@ -23,11 +24,8 @@ const storage = multer.diskStorage({
   
   const upload = multer({
     storage: storage,
-    limits: {
-      fileSize: 1024 * 1024 * 5
-    },
     fileFilter: fileFilter
-  });
+  }).single('file');
 
 
 //register frorm
@@ -37,7 +35,7 @@ router.get('/addMed', function(req, res){
                                    quantity: ''})});
 });
 
-router.post('/', upload.single('image') , ensureAuthenticated, function(req, res, next) {
+router.post('/', upload , ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
     const image = req.file.filename;
     const quantity = req.body.quantity;
