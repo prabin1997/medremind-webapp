@@ -39,22 +39,36 @@ router.get('/addMed', function(req, res){
 
 router.post('/', upload , ensureAuthenticated, function(req, res, next) {
     const name = req.body.name;
-    if(req.file)image = req.file.filename;
     const quantity = req.body.quantity;
     const createdUser = req.user._id;
     const adminNumber = req.user.adminNumber;
     const adminCode = req.user.adminReq;
+
+    if(req.file){
+    const image = req.file.filename;
     const medication = new Medication({name: name,
-                                        image: image,
-                                        quantity: quantity,
-                                        adminCode: adminCode,
-                                        adminNumber: adminNumber,
-                                        createdUser: createdUser});
-    medication.save()
-      .then(function() {
+        image: image,
+        quantity: quantity,
+        adminCode: adminCode,
+        adminNumber: adminNumber,
+        createdUser: createdUser});
+        medication.save()
+        .then(function() {
         res.redirect('medications/viewMed');
-      });
-  });
+        });
+    }else{
+        const medication = new Medication({name: name,
+            quantity: quantity,
+            adminCode: adminCode,
+            adminNumber: adminNumber,
+            createdUser: createdUser});
+            medication.save()
+            .then(function() {
+            res.redirect('medications/viewMed');
+            });
+    }
+    
+});
 
 // view med page
 router.get('/viewMed', ensureAuthenticated, function(req, res) {
