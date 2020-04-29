@@ -5,11 +5,7 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center !{appointment.name}
       .card-panel.appointmentFull.white.row
-        each medication in medications
-          if medication.image
-            img(src='/uploads/'+medication.image) 
-          else
-            img(src='/img/med.png')
+        img(src='/uploads/'+medImage) 
         .appointment-details
           .appointment-name Name: !{appointment.name}
           .appointment-time Time: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
