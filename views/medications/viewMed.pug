@@ -5,7 +5,10 @@ block content
         h5.center My Medications
     each medication in medications
         .card-panel.medication.white.row
-            img(src='/img/med.png')
+            if medication.image
+                img.imageSrc1(src="./uploads/+!{medication.image}") 
+            else
+                img(src='/img/med.png')
             .medication-details
                 .medication-name Name: !{medication.name}
                 .medication-time Quantity: !{medication.quantity}
