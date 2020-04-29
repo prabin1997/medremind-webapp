@@ -7,7 +7,11 @@ block content
     each appointment in appointments
       if appointment.confirm == false
         .card-panel.appointment.white.row
-          img(src='/img/med.png')
+          each medication in medications
+            if appointment.name == medication.name
+              img(src='/uploads/'+medication.image) 
+            else
+              img(src='/img/med.png')
           .appointment-details
             .appointment-name !{appointment.name}
             .appointment-time !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}

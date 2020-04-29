@@ -19,12 +19,15 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
      .then(function(appointments) {
+      Medication.find().where('adminCode').equals(user)
+      .then(function(medications){
        if(isadmin == true){
-       res.render('appointments/index', {user: usera , appointments: appointments});
+       res.render('appointments/index', {user: usera , appointments: appointments, medications: medications});
        } else if(isadmin == false){
-       res.render('appointments/pindex', {user: usera , appointments: appointments});
+       res.render('appointments/pindex', {user: usera , appointments: appointments, medications: medications});
        }
     });
+  });
 });
 
 
@@ -40,7 +43,7 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
                                   mealTime: '',
                                   time: '',
                                   note: ''})});
-  });
+    });
 });
 
 // POST: /appointments
