@@ -44,31 +44,22 @@ router.post('/', upload , ensureAuthenticated, function(req, res, next) {
     const adminNumber = req.user.adminNumber;
     const adminCode = req.user.adminReq;
 
-        if (req.file.filename !== undefined) {
+        if (req.file.filename) {
         // process image here
         const image = req.file.filename;
-        const medication = new Medication({name: name,
-            image: image,
-            quantity: quantity,
-            adminCode: adminCode,
-            adminNumber: adminNumber,
-            createdUser: createdUser});
+        const medication = new Medication({
+        name: name,
+        image: image,
+        quantity: quantity,
+        adminCode: adminCode,
+        adminNumber: adminNumber,
+        createdUser: createdUser});
         medication.save()
         .then(function() {
         res.redirect('medications/viewMed');
         });
-        }else{
-        // process all other fields
-    const medication = new Medication({name: name,
-                                        quantity: quantity,
-                                        adminCode: adminCode,
-                                        adminNumber: adminNumber,
-                                        createdUser: createdUser});
-    medication.save()
-      .then(function() {
-        res.redirect('medications/viewMed');
-      });
-}});
+    }
+});
 
 
 // view med page
