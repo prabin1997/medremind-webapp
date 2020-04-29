@@ -133,10 +133,10 @@ router.get('/:id/name/fullMed', ensureAuthenticated, function(req, res, next) {
   const user = req.user.adminReq;
 
   Medication.find({ $and: [{ name: { $eq: name }},{ adminCode: { $eq: user }}]})
-  .distinct("image").then(function(medImage){
+  .then(function(medications){
   Appointment.findOne({_id: id})
   .then(function(appointment) {
-      res.render('appointments/fullMed', {appointment: appointment, medImage: medImage});
+      res.render('appointments/fullMed', {appointment: appointment, medications: medications});
     });
   });
 });

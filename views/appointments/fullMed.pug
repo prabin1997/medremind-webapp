@@ -5,9 +5,10 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center !{appointment.name}
       .card-panel.appointmentFull.white.row
-        if medImage
-            img(src='/uploads/'+medImage) 
-        else
+        each medication in medications
+          if medication.image
+            img(src='/uploads/'+medication.image) 
+          else
             img(src='/img/med.png')
         .appointment-details
           .appointment-name Name: !{appointment.name}
