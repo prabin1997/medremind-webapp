@@ -3,7 +3,7 @@ extends ../layout
 block content
   if user.isAdmin
     .appointment.container.grey-text.text-darken-1
-      h5.center Medications
+      h5.center My Reminders
     each appointment in appointments
       if appointment.confirm == false
         .card-panel.appointment.white.row
