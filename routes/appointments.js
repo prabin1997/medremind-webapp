@@ -173,6 +173,7 @@ router.get('/appointments/diary', ensureAuthenticated, function(req, res) {
   const usera = req.user;
   Appointment.find().where('userAdmin').equals(user)
   .find({confirm: true})
+  .sort({time: 1})
    .then(function(appointments) {
      res.render('appointments/diary', {user: usera , appointments: appointments});
    });
