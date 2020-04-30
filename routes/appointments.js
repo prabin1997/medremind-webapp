@@ -18,6 +18,7 @@ router.get('/', checkAuthenticated, function(req, res, next) {
     const isadmin = req.user.isAdmin;
     const usera = req.user;
     Appointment.find().where('userAdmin').equals(user)
+    .sort({time: 1})
      .then(function(appointments) {
        if(isadmin == true){
        res.render('appointments/index', {user: usera , appointments: appointments});
