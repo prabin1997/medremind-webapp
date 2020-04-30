@@ -1,6 +1,6 @@
 'use strict';
 
-require('serve-favicon');
+const favicon = require('serve-favicon');
 const express = require('express');
 const cookieSession = require('cookie-session');
 const http = require('http');
@@ -87,7 +87,7 @@ app.get('*', function(req, res, next){
 
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'img', 'icons', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -128,10 +128,7 @@ app.get("/loader.js", function(req, res){
   res.sendFile(path.join(__dirname,"loader.js"));
 });
 
-//fallback page 
-router.get('/fallback', function(req, res){
-  res.render('fallback');
-});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
