@@ -15,5 +15,5 @@ block content
                         .appointment-time Status: Not Taken
                     .appointment-arrow
                         a(href="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed").i.material-icons arrow_forward
-        else
+        if appointment.confirm == true
             h6.center You have no reminders left!

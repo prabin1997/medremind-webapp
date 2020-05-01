@@ -76,6 +76,9 @@ nav .sidenav-trigger{
   .add-btn{
     background: var(--title) !important;
   }
+  .appointment-add{
+    font-size: 20px;
+  }
 
   .appointment-name{
   font-weight: bold;

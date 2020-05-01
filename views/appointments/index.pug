@@ -20,8 +20,9 @@ block content
             a(href="/appointments/" + appointment.id + "/edit").i.material-icons edit_outline 
           .med-delete
             a.modal-trigger(href="#modal1").i.material-icons delete_outline
-      else
+      if appointment.confirm == true
         h6.center Click here to set reminders!
+        .appointment-add
           a(href='/appointments/create').i.material-icons add_alarm
       #modal1.modal
         .modal-content
