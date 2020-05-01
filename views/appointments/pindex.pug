@@ -1,19 +1,20 @@
 extends ../layout
 
 block content
-    .appointment.container.grey-text.text-darken-1
-        h5.center My reminders
-    each appointment in appointments
-        if appointment.confirm == false
-            .card-panel.appointment.white.row
-                .appointment-details
-                    .appointment-name Name: !{appointment.name}
-                    .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-                    if appointment.confirm == true
-                        .appointment-time Status: Taken
-                    if appointment.confirm == false
-                        .appointment-time Status: Not Taken
-                    .appointment-arrow
-                        a(href="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed").i.material-icons arrow_forward
-        if appointment.confirm == true
-            h6.center You have no reminders left!
+    if user
+        .appointment.container.grey-text.text-darken-1
+            h5.center My reminders
+        each appointment in appointments
+            if appointment.confirm == false
+                .card-panel.appointment.white.row
+                    .appointment-details
+                        .appointment-name Name: !{appointment.name}
+                        .appointment-time Time:!{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+                        if appointment.confirm == true
+                            .appointment-time Status: Taken
+                        if appointment.confirm == false
+                            .appointment-time Status: Not Taken
+                        .appointment-arrow
+                            a(href="/appointments/" + appointment.id + "/" + appointment.name + "/fullMed").i.material-icons arrow_forward
+            if appointment.confirm.length === 0
+                h6.center You have no reminders left!
