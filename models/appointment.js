@@ -52,7 +52,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                 to: `+ ${appointment.patientNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
-                body: `Hi there. Just a reminder to take your ${appointment.name} medication.\nMedication time: At ${moment(appointment.time).format('hh:mma')} - ${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
+                body: `Hi there. Just a reminder to take your ${appointment.name} medication.\nMedication time: At ${moment(appointment.time).format('hh:mma')} - ${appointment.mealTime}\nNote: ${appointment.note}\nClick on this link to confirm medication: https://medremind-app.herokuapp.com/appointments/${appointment._id}/${appointment._name}/fullMed `, 
                 /* eslint-enable max-len */
             };
 
@@ -105,7 +105,7 @@ AppointmentSchema.statics.sendReminder = function(callback) {
               to: `+ ${appointment.patientNumber}`,
               from: cfg.twilioPhoneNumber,
               /* eslint-disable max-len */
-              body: `Hi there. Just a reminder that you still have not taken your ${appointment.name} medication.\nIf you taken the medication please click on this link to confirm: https://medremind-app.herokuapp.com/appointments/${appointment._id}/fullMed `, 
+              body: `Hi there. Just a reminder that you still have not taken your ${appointment.name} medication.\nIf you taken the medication please click on this link to confirm: https://medremind-app.herokuapp.com/appointments/${appointment._id}/${appointment._name}/fullMed `, 
               /* eslint-enable max-len */
           };
 

@@ -5,17 +5,20 @@ block content
     .appointment.container.grey-text.text-darken-1
       h5.center Medications Diary
     each appointment in appointments
-      .card-panel.appointment.white.row
-        .appointment-details
-          .appointment-name Name: !{appointment.name}
-          .appointment-time Date: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
-          if user.isAdmin & appointment.confirm == true
-              .appointment-time Status: Taken
-          if user.isAdmin & appointment.confirm == false
-            .appointment-time Status: Not Taken
-        if user.isAdmin
-          .med-delete
-            a.modal-trigger(href="#modal1").i.material-icons delete_outline
+      if appointment.confirm == true
+        .card-panel.appointment.white.row
+          .appointment-details
+            .appointment-name Name: !{appointment.name}
+            .appointment-time Date: !{moment(appointment.time).format('MMMM Do YYYY, h:mm:a')}
+            if user.isAdmin & appointment.confirm == true
+                .appointment-time Status: Taken
+            if user.isAdmin & appointment.confirm == false
+              .appointment-time Status: Not Taken
+          if user.isAdmin
+            .med-delete
+              a.modal-trigger(href="#modal1").i.material-icons delete_outline
+      else 
+        h6.center Your diary is empty!
       #modal1.modal
         .modal-content
           h4 Delete Medication
