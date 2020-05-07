@@ -151,6 +151,11 @@ router.get('/login', function(req, res){
     res.render('login');
 });
 
+//offilne page
+router.get('/offline', function(req, res){
+    res.render('offline');
+});
+
 // Login Process
 router.post('/login', function(req, res, next){
   passport.authenticate('local', {
