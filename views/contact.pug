@@ -9,3 +9,17 @@ block content
   h6 Find me at:
   ul
     li 2gurup14@solent.ac.uk
+  .divider
+  h4 Contact Form
+  form
+    #form-group
+       label Name:
+       input.form-control(name="name", type ='text')
+    #form-group
+       label Email:
+       input.form-control(name="username", type ='text')
+    #form-group
+       label Enter message:
+       textarea#input.form-control(name="message", type ='text')
+    br
+    input.btn.btn-primary(type='submit', value='submit', href='/users/home')
