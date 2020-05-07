@@ -6,7 +6,6 @@ const toCache = [
   './users/learn',
   './users/login',
   './users/contact',
-  './users/offline',
   './css/style.css',
   './img/learn1.jpg',
   './img/learn2.jpg',
@@ -60,9 +59,6 @@ self.addEventListener('fetch', function(event) {
           .then((cache) => {
             return cache.match(event.request)
           })
-      }).catch(function(error) {
-        console.log('Error, ', error);
-        return caches.match('./users/offline');
       })
   )
 })
