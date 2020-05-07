@@ -12,6 +12,7 @@ const toCache = [
   './img/learn3.jpg',
   './img/med.png',
   './img/icons/favicon.ico',
+  './img/icons/apple-touch-icon.png',
   './js/main.js',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
